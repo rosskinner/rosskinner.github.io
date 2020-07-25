@@ -1,16 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
 body {
-  font-family: "Amiri", serif;
-  color: black; }
-
-.project-thumb, .project-thumb .img {
-  height: calc(100vh - 100px); }
-
-.project-thumb .img {
-  background-position: center;
-  background-repeat: no-repeat; }
-
-body {
   font-family: "Inter", sans-serif;
   font-weight: 300; }
 

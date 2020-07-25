@@ -30,8 +30,20 @@
       <div class='w-40'>
         <p class='f1 fw5 ma0'>{{project.title}}</p>
       </div>
-      <div>
+      <div class='w-20'>
         <p>{{project.info}}</p>
+      </div>
+      <div class='w-10'>
+        <p>{{project.date | date:"%Y"}}</p>
+      </div>
+      <div class='w-10'>
+        <p>{{project.stack}}</p>
+      </div>
+      <div class='w-10'>
+        <p>{{project.delivery}}</p>
+      </div>
+      <div class='w-10'>
+        <p>{{project.links}}</p>
       </div>
     </article>
   {% endfor %}

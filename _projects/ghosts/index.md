@@ -3,11 +3,11 @@ title: Ghosts, Toast and the Things Unsaid
 info: Ghosts, Toast and the Things Unsaid
 description: Some More Cool Shit
 permalink: /projects/starlight
-date: 2017-12-12 14:00:00 +1000
+date: 2016-12-12 14:00:00 +1000
 stack: [Bela IO, C#]
-output: [Physical Prototype]
+delivery: [Windows Application, Network]
 links:
-    "Go Check out the Project HERE": "https://www.google.com"
+    ["https://www.google.com"]
 ---
 
 {% include default-project.html %}

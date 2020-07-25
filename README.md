@@ -14,19 +14,6 @@
 
 `./build.sh` builds the jekyll part of the project, outputs to `_site/` and trigger the `npm run build` to build javascript source.
 
-### Npm Commands
-
-> You will need to run your npm commands separated.
-
-`octopus:dev`: Dev mode for Octopus
-
-`octopus:build`: Build Octopus
-
-`build`:  run all build tasks, e.g. `npm run ocptus:build && npm run proto1:build`
-
-
-> All npm commands for final build will need to be added to `npm run build` as this is the command called from the full build 'build.sh'
-
 
 ### Automated build and Deployment
 
