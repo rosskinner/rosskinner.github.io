@@ -1,4 +1,4 @@
-# Portfolio - 2019
+# Portfolio - 2020
 
 ### Requirements:
 
@@ -13,23 +13,6 @@
 `./test.sh` runs [html-proofer](https://github.com/gjtorikian/html-proofer).
 
 `./build.sh` builds the jekyll part of the project, outputs to `_site/` and trigger the `npm run build` to build javascript source.
-
-
-### Automated build and Deployment
-
-The deployment of the site happens on any commit to `master` branch, which will trigger a CircleCI build.
-
-The CircleCI account is set under the github user 'grumpy-sailor'.
-
-After a successful built, the static site folder is tranferred via Rsync to [gs-cluster](https://github.com/GrumpySailor/gs-cluster) currently hosted on Digital Ocean.
-
-At the moment, this development version is being served from: https://new.grumpysailor.com/
-
-Plugins
-
-[jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag/)
-
-[html-proofer](https://github.com/gjtorikian/html-proofer)
 
 
 ## CSS
@@ -48,37 +31,4 @@ Maybe in the future we can remove the minified file and use [tachyons-sass](http
 
 Main Pages:
 - index.md
-- about.md
-- contact.md
 - projects.md
-
-
-### Projects
-
-All projects must be placed into `_projects`.
-The project's folder name should always be lowercase and use dashes to separate words, like:
-- `my-awesome-project-name`
-- `road-to-zero`
-- `kings-of-baxter`
-- `pixel`
-
-
-Mandatory files in a project folder:
-- index.md
-- tb.jpg
-- hero.jpg
-
-
-Mandatory Yaml variables:
-
-```yaml
-title: "Lorem Ipsum"
-info: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-permalink: /projects/lorem-ipsum
-date: 2018-10-09 14:00:00 +1000
-team: ["Google", "Grumpy Picures"]
-delivery: [ "Film Production", "Story Sphere Production", "Audio Production"]
-```
-
-
-### Project Components
