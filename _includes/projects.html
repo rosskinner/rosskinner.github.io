@@ -1,0 +1,38 @@
+{% assign list = site.projects | sort: 'date' | reverse %}
+<div class='w-100 flex flex-column'>
+  <div>
+    <p>
+      The stuff:
+    </p>
+  </div>
+  <article class='w-100 flex flex-row items-center bb bw1' alt='{{ project.title }}' title='{{ project.title }}' >
+    <div class='w-40'>
+      <p>Title</p>
+    </div>
+    <div class='w-20'>
+      <p>Description</p>
+    </div>
+    <div class='w-10'>
+      <p>Date</p>
+    </div>
+    <div class='w-10'>
+      <p>Stack</p>
+    </div>
+    <div class='w-10'>
+      <p>Output</p>
+    </div>
+    <div class='w-10'>
+      <p>Links</p>
+    </div>
+  </article>
+  {% for project in list %}
+    <article class='w-100 flex flex-row items-center' alt='{{ project.title }}' title='{{ project.title }}' >
+      <div class='w-40'>
+        <p class='f1 fw5 ma0'>{{project.title}}</p>
+      </div>
+      <div>
+        <p>{{project.info}}</p>
+      </div>
+    </article>
+  {% endfor %}
+</div>

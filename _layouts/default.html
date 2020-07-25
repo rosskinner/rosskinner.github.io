@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
+  {%- include head.html -%}
+
+  <body class='w-100 bg-white relative bt bw2 b--green green'>
+    <main class='flex flex-column relative mv2 mh3' aria-label='Content'>
+      <div class='flex flex-row justify-between'>
+        <div class='w-70'>
+          <div > 
+            <p>Rosalind Skinner</p>
+          </div>
+          <div>
+            <p class='f1 fw5'>
+              - maker/creative/technologist/coder /aslongasigettocreatecoolinterestingthingsplease<br/>
+              - software/hardware/physical interactions and stuff<br/>
+              - currently 👀 to make your cool shit
+            </p>
+          </div>
+      </div>
+      <div class='w-30 mw5 ba b--green bw1 mt4 h-100'>
+        <div class='bb bw1 b--green'>
+          Contact
+        </div>
+        <a class='link green contact-link' id='email' href='mailto:ros.skinner@gmail.com'>ros.skinner@gmail.com</a>
+        <a class='link green contact-link' id='insta' href='https://www.instagram.com/ros_skinner/'>ros_skinner</a>
+        <a class='link green contact-link' id='linkedin' href='https://au.linkedin.com/in/rosalind-skinner-6335219a'>Rosalind Skinner</a>
+        <a class='link green contact-link bn' id='github' href='https://github.com/rosskinner'>rosskinner</a>
+      </div>
+  </div>
+    <div>
+      {% include projects.html %}
+      
+      </div>
+      <!-- <div class='absolute w-100 h-100'> 
+        <div id='selector' class=''></div>
+      </div>
+      <div id='grid'>
+      </div> -->
+      {{ content }}
+    </main>
+    <!-- <script>
+
+      const gridContainer = document.getElementById('grid')
+      const ROWS = 50
+      const COLS = 50
+      const grid = []
+      for (let i = 0; i < ROWS; i++) {      
+        for (let j = 0; j < COLS; j++) {
+          const index = i*ROWS + j
+          let div = document.createElement('div')
+          div.className = 'box'
+          let left = j * 80
+          let top = i * 22.8
+          diff= 0
+
+          if ((i % 2) === 0) {
+            left = left + 40
+            diff = 1
+          }
+
+          // if (i * 50 + j - diff) {
+          //   div.style.backgroundColor = 'red'
+          // }
+          div.style.left = `${left}px`
+          div.style.top = `${top}px`
+          div.setAttribute('data-index', index)
+          div.setAttribute('data-i', i)
+          div.setAttribute('data-j', j)
+          
+          // div.style.marginTop = `${j*6}px`
+          grid.push(div)
+          gridContainer.appendChild(div)
+          div.addEventListener('click', addBrick)
+          
+        }
+      }
+
+      const selector = document.getElementById('selector')
+      selector.setAttribute('data-color', 'blue')
+      const colors = ['blue', 'yellow', 'green']
+      document.addEventListener('mousemove', e => {
+        // console.log(e.x)
+        selector.style.left = `${e.x}px`
+        selector.style.top = `${e.y}px`
+      })
+
+      function addBrick(e) {
+        console.log(e.target.getAttribute('data-index'))
+        const container = e.target
+        const index = parseInt(e.target.getAttribute('data-index'))
+        const row = parseInt(e.target.getAttribute('data-i'))
+        const col = parseInt(e.target.getAttribute('data-j'))
+        let diff = -1
+        if(row %2 == 0) diff = 0
+        
+        const top = (row-1) * 50 + (col+1) + diff
+        const right = (row+1) * 50 + (col+1) + diff
+        const bottom = (row +1) * 50 + (col) + diff
+        const left = (row -1) * 50 + (col) + diff
+        
+        const neighbours = {
+          top: {
+            el: grid[top],
+            c: grid[top].getAttribute('data-type')
+          }, 
+          right: {
+            el: grid[right],
+            c: grid[right].getAttribute('data-type')
+          }, 
+          bottom:{ 
+            el: grid[bottom],
+            c: grid[bottom].getAttribute('data-type')
+          }, 
+          left: {
+            el: grid[left],
+            c: grid[left].getAttribute('data-type')
+          }
+        }
+        
+
+        
+        // grid[left].style.backgroundColor = 'red'
+        // grid[bottom].style.backgroundColor = 'red'
+        // grid[top].style.backgroundColor = 'red'
+        // grid[right].style.backgroundColor = 'red'
+        let initColor = selector.getAttribute('data-color')
+        let color = initColor
+        console.log(initColor)
+        if (initColor === 'yellow' || initColor === 'blue') {
+          if (initColor === 'yellow') {
+            if (neighbours.top.c === 'blue') {
+              color = 'yellow-bottom'
+            }
+
+            if (neighbours.right.c === 'blue') {
+              color = 'yellow-left'
+            }
+
+            if (neighbours.bottom.c === 'blue') {
+              color = 'yellow-top'
+            }
+
+            if (neighbours.left.c === 'blue') {
+              color = 'yellow-right'
+            }
+
+            if (neighbours.top.c === 'blue' && neighbours.right.c === 'blue') {
+              color = 'yellow-bottom-left'
+            }
+
+            if (neighbours.top.c === 'blue' && neighbours.left.c === 'blue') {
+              color = 'yellow-bottom-right'
+            }
+
+            if (neighbours.bottom.c === 'blue' && neighbours.left.c === 'blue') {
+              color = 'yellow-top-right'
+            }
+
+            if (neighbours.bottom.c === 'blue' && neighbours.right.c === 'blue') {
+              color = 'yellow-top-left'
+            }
+
+            if (neighbours.bottom.c === 'yellow-left' && neighbours.left.c === 'yellow-bottom') {
+              color = 'yellow-top-right-corner'
+            }
+
+            if (neighbours.bottom.c === 'yellow-left' && neighbours.right.c === 'yellow-bottom') {
+              color = 'yellow-top-left-corner'
+            }
+
+            if (neighbours.top.c === 'yellow-right' && neighbours.left.c === 'yellow-bottom') {
+              color = 'yellow-bottom-right-corner'
+            }
+
+            if (neighbours.top.c === 'yellow-left' && neighbours.right.c === 'yellow-top') {
+              color = 'yellow-bottom-left-corner'
+            }
+          }
+
+          if (initColor === 'blue') {
+
+            if (neighbours.top.c === 'yellow') {
+              neighbours.top.el.firstChild.src = `/assets/bricks/camera-yellow-top.png`
+              // color = 'yellow-top'
+            }
+
+            if (neighbours.right.c === 'yellow') {
+              neighbours.right.el.firstChild.src = `/assets/bricks/camera-yellow-right.png`
+            }
+
+            if (neighbours.bottom.c === 'yellow') {
+              neighbours.bottom.el.firstChild.src = `/assets/bricks/camera-yellow-bottom.png`
+            }
+
+            if (neighbours.left.c === 'yellow') {
+              neighbours.left.el.firstChild.src = `/assets/bricks/camera-yellow-left.png`
+            }
+
+            if (neighbours.top.c === 'yellow' && neighbours.right.c === 'yellow') {
+              neighbours.top.el.firstChild.src = `/assets/bricks/camera-yellow-top.png`
+              neighbours.right.el.firstChild.src = `/assets/bricks/camera-yellow-right.png`
+            }
+
+            if (neighbours.top.c === 'yellow' && neighbours.left.c === 'yellow') {
+              neighbours.top.el.firstChild.src = `/assets/bricks/camera-yellow-top.png`
+              neighbours.left.el.firstChild.src = `/assets/bricks/camera-yellow-left.png`
+            }
+
+            if (neighbours.bottom.c === 'yellow' && neighbours.left.c === 'yellow') {
+              neighbours.bottom.el.firstChild.src = `/assets/bricks/camera-yellow-bottom.png`
+              neighbours.left.el.firstChild.src = `/assets/bricks/camera-yellow-left.png`
+            }
+
+            if (neighbours.bottom.c === 'yellow' && neighbours.right.c === 'yellow') {
+              neighbours.bottom.el.firstChild.src = `/assets/bricks/camera-yellow-bottom.png`
+              neighbours.right.el.firstChild.src = `/assets/bricks/camera-yellow-right.png`
+            }
+
+            if (neighbours.right.c === 'yellow-bottom') {
+              neighbours.right.el.firstChild.src = `/assets/bricks/camera-yellow-bottom-right.png`
+            }
+
+            if (neighbours.right.c === 'yellow-top') {
+              neighbours.right.el.firstChild.src = `/assets/bricks/camera-yellow-top-right.png`
+            }
+
+            if (neighbours.left.c === 'yellow-bottom') {
+              neighbours.right.el.firstChild.src = `/assets/bricks/camera-yellow-bottom-left.png`
+            }
+
+            if (neighbours.left.c === 'yellow-top') {
+              neighbours.right.el.firstChild.src = `/assets/bricks/camera-yellow-top-left.png`
+            }
+
+            if (neighbours.top.c === 'yellow-left') {
+              neighbours.top.el.firstChild.src = `/assets/bricks/camera-yellow-top-left.png`
+            }
+
+            if (neighbours.top.c === 'yellow-right') {
+              neighbours.top.el.firstChild.src = `/assets/bricks/camera-yellow-top-right.png`
+            }
+
+            if (neighbours.bottom.c === 'yellow-left') {
+              neighbours.bottom.el.firstChild.src = `/assets/bricks/camera-yellow-bottom-left.png`
+            }
+
+            if (neighbours.bottom.c === 'yellow-right') {
+              neighbours.bottom.el.firstChild.src = `/assets/bricks/camera-yellow-bottom-right.png`
+            }
+
+          }
+
+        }
+        // const neighbouring = neighbours.find(el => el.getAttribute('data-type'))
+        // if (neighbouring) {
+        //   console.log('no surround', neighbouring)
+        // }
+        
+        
+        console.log()
+        container.setAttribute('data-type', color)
+        const img = document.createElement('img')
+        img.src = `/assets/bricks/camera-${color}.png`
+        container.appendChild(img)
+        selector.setAttribute('data-color', colors[Math.floor(Math.random() * Math.floor(3))])
+        
+      }
+    </script> -->
+  
+  </body>
+</html>

@@ -1,0 +1,79 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Rosalind Skinner
+author: Rosalind Skinner
+email: ros.skinner@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Rosalind Skinner. Software Engineer. Creative Technologist. Ocean. Out Bush.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://rosalindskinner.com" # the base hostname & protocol for your site, e.g. http://grumpysailor.com
+logo: ""
+instagram_username: ros_skinner
+github_username:  rosskinner
+host: 0.0.0.0
+
+# Build settings
+markdown: kramdown
+livereload: true
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+collections:
+  posts:
+    output: false
+  projects:
+    output: true
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+exclude:
+  - _octopus
+  - build.sh
+  - down.sh
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package-lock.json
+  - package.json
+  - nginx/
+  - README.md
+  - serve.sh
+  - test.sh
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+sass:
+  sass_dir: _sass
+
+defaults:
+  -
+    scope:
+      type: pages
+      path: ""
+    values:
+
+  -
+    scope:
+      type: projects
+    values:
+      layout: project
+

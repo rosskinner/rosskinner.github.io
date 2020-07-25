@@ -1,0 +1,85 @@
+:root {
+  --space: 64px;
+  --space-large: 128px;
+}
+
+.html-label-title {
+  font-size: 2em;
+  line-height: 1em;
+  position: absolute;
+}
+
+.html-label-subtitle {
+  font-size: 3em;
+  position: absolute;
+}
+
+.html-label-tl {
+  left: var(--space);
+  top: calc(var(--space) + 52px);
+}
+
+.html-label-bl {
+  bottom: var(--space);
+  left: var(--space);
+}
+
+.html-label-br {
+  bottom: var(--space);
+  right: var(--space);
+}
+
+.html-label-tr {
+  top: calc(var(--space) + 52px);
+  right: var(--space);
+}
+
+@media screen and (min-width: 30em) and (max-width: 60em) {
+  .html-label-title {
+    font-size: 2.5em;
+  }
+
+  .html-label-subtitle {
+    font-size: 4em;
+  }
+}
+
+@media screen and (min-width: 60em) and (max-width: 90em) {
+  .html-label-title {
+    font-size: 3em;
+  }
+
+  .html-label-subtitle {
+    font-size: 5em;
+  }
+}
+
+@media screen and (min-width: 90em) {
+  .html-label-title {
+    font-size: 4em;
+  }
+
+  .html-label-subtitle {
+    font-size: 6em;
+  }
+
+  .html-label-tl {
+    left: var(--space-large);
+    top: calc(var(--space-large) + 52px);
+  }
+
+  .html-label-bl {
+    bottom: var(--space-large);
+    left: var(--space-large);
+  }
+
+  .html-label-br {
+    bottom: var(--space-large);
+    right: var(--space-large);
+  }
+
+  .html-label-tr {
+    top: calc(var(--space-large) + 52px);
+    right: var(--space-large);
+  }
+}
