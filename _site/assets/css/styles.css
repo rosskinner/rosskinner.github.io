@@ -8,7 +8,8 @@ h1 {
 
 p {
   font-weight: 400;
-  font-size: 1rem; }
+  font-size: 1rem;
+  word-wrap: break-word; }
 
 .contact-link {
   display: block;
@@ -18,51 +19,32 @@ p {
 .contact-link::before {
   display: inline-block;
   padding-right: 5px;
-  min-width: 60px;
+  min-width: 64px;
   margin-right: 5px;
   border-right: 2px solid #19a974; }
 
 #email::before {
-  content: "email"; }
+  content: "Email"; }
 
 #insta::before {
-  content: "insta"; }
+  content: "Insta"; }
 
 #linkedin::before {
-  content: "linkedin"; }
+  content: "Linkedin"; }
 
 #github::before {
-  content: "github"; }
+  content: "Github"; }
 
-#grid {
-  font-size: 0px;
-  width: 2020px; }
+ul {
+  list-style-type: none; }
 
-.box {
-  width: 38px;
-  height: 45px;
-  display: inline-block;
-  position: absolute; }
-
-img {
+li:before {
+  content: "-";
   position: absolute;
-  max-width: 80px !important;
-  width: 80px;
-  left: -21px;
-  bottom: 0px;
-  pointer-events: none; }
+  margin-left: -2.2rem; }
 
-#selector {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  z-index: 100; }
+.project-image {
+  opacity: 0; }
 
-#selector[data-color='blue'] {
-  background-color: blue; }
-
-#selector[data-color='yellow'] {
-  background-color: yellow; }
-
-#selector[data-color='green'] {
-  background-color: green; }
+.project-item:hover > .project-image {
+  opacity: 1; }

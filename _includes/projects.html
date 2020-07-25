@@ -1,10 +1,5 @@
 {% assign list = site.projects | sort: 'date' | reverse %}
 <div class='w-100 flex flex-column'>
-  <div>
-    <p>
-      The stuff:
-    </p>
-  </div>
   <article class='w-100 flex flex-row items-center bb bw1' alt='{{ project.title }}' title='{{ project.title }}' >
     <div class='w-40'>
       <p>Title</p>
@@ -19,32 +14,34 @@
       <p>Stack</p>
     </div>
     <div class='w-10'>
-      <p>Output</p>
+      <p>Deliverables</p>
     </div>
     <div class='w-10'>
       <p>Links</p>
     </div>
   </article>
   {% for project in list %}
-    <article class='w-100 flex flex-row items-center' alt='{{ project.title }}' title='{{ project.title }}' >
+    <article class='w-100 flex flex-row items-start ws-normal relative project-item bb pointer bw1' alt='{{ project.title }}' title='{{ project.title }}' >
+      <img class='absolute top-0 left-0 project-image w-30' src='{{project.permalink}}/hero.jpg'/>
       <div class='w-40'>
         <p class='f1 fw5 ma0'>{{project.title}}</p>
       </div>
       <div class='w-20'>
-        <p>{{project.info}}</p>
+        <p>{{project.description}}</p>
       </div>
       <div class='w-10'>
         <p>{{project.date | date:"%Y"}}</p>
       </div>
       <div class='w-10'>
-        <p>{{project.stack}}</p>
+        <p>{% for item in project.stack %}{{ item }}<br/> {% endfor %}</p>
       </div>
       <div class='w-10'>
-        <p>{{project.delivery}}</p>
+        <p>{% for item in project.delivery %}{{ item }}<br/> {% endfor %}</p>
       </div>
       <div class='w-10'>
-        <p>{{project.links}}</p>
+        <p>{% for item in project.links %}<a class='link green' target='_blank' href={{item}}>{{ item }}</a><br/> {% endfor %}</p>
       </div>
     </article>
+    
   {% endfor %}
 </div>
