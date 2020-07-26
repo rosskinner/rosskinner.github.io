@@ -10,6 +10,7 @@ body
   font-family: 'Inter', sans-serif
   font-weight: 300
   // letter-spacing: -0.01rem
+
 h1
   font-weight: 400
 
@@ -49,12 +50,28 @@ li:before
   position: absolute
   margin-left: -2.2rem
 
+.project-image-container
+  opacity: 0
+  display: none
+  z-index: -1
+
+.project-item:hover > .project-image-container
+  opacity: 1
+  display: block
+
 .project-image
+  background-size: contain
+  background-position: center
+  background-repeat: no-repeat
   opacity: 0
 
-.project-item:hover > .project-image
+.project-image[data-active]
   opacity: 1
+
+
   
+  
+
 // #grid
 //   font-size: 0px
 //   width: 2020px
