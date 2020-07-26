@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 300; }
+
+h1 {
+  font-weight: 400; }
+
+p {
+  font-weight: 400;
+  font-size: 1rem;
+  word-wrap: break-word; }
+
+.contact-link {
+  display: block;
+  border-bottom: 2px solid #19a974;
+  cursor: pointer; }
+
+.contact-link::before {
+  display: inline-block;
+  padding-right: 5px;
+  min-width: 64px;
+  margin-right: 5px;
+  border-right: 2px solid #19a974; }
+
+#email::before {
+  content: "Email"; }
+
+#insta::before {
+  content: "Insta"; }
+
+#linkedin::before {
+  content: "Linkedin"; }
+
+#github::before {
+  content: "Github"; }
+
+ul {
+  list-style-type: none; }
+
+li:before {
+  content: "-";
+  position: absolute;
+  margin-left: -2.2rem; }
+
+.project-image-container {
+  opacity: 0;
+  display: none;
+  z-index: -1; }
+
+.project-item:hover > .project-image-container {
+  opacity: 1;
+  display: block; }
+
+.project-image {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0; }
+
+.project-image[data-active] {
+  opacity: 1; }

@@ -44,7 +44,6 @@ collections:
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
 exclude:
-  - _octopus
   - build.sh
   - down.sh
   - Gemfile
@@ -60,7 +59,7 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-
+destination: docs/
 sass:
   sass_dir: _sass
 

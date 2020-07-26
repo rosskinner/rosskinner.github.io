@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "Rosalind Skinner - Portfolio 2019",
   "scripts": {
-    "octopus:dev": "webpack --config ./_octopus/webpack.base.js --env development",
-    "octopus:build": "webpack --config ./_octopus/webpack.base.js --env production",
-    "lint": "./node_modules/.bin/standard",
-    "build": "npm run octopus:build"
+    "lint": "./node_modules/.bin/standard"
   },
   "author": "Rosalind Skinner",
   "license": "ISC",
