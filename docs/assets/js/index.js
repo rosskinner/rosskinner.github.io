@@ -7,10 +7,12 @@ window.addEventListener('load', function () {
     project.addEventListener('mouseenter', showImage, false)
     project.addEventListener('mousemove', cycleImages, false)
     project.addEventListener('mouseleave', resetImages, false)
+    project.addEventListener('click', showContent, false)
   })
 })
 
 function showImage (e) {
+  // if (this.classList.contains('active-project')) return
   const imageContainer = this.children[0]
 
   if (!imageContainer.children[0].hasAttribute('data-active')) {
@@ -26,26 +28,37 @@ function showImage (e) {
 }
 
 function cycleImages (e) {
+  // if (this.classList.contains('active-project')) return
+  const container = this.children[0]
   let a = mousePos.x - e.x
   let b = mousePos.y - e.y
   let c = Math.sqrt((a * a) + (b * b))
-  if (c > 20) {
+
+  if (c > 40) {
     mousePos = {
       x: e.x,
       y: e.y
     }
-    const container = this.children[0]
+    
     const index = parseInt(this.getAttribute('data-index'))
     container.children[imageActive[index]].removeAttribute('data-active')
     const nextImage = imageActive[index] === container.children.length - 1 ? 0 : imageActive[index] + 1
     imageActive[index] = nextImage
     container.children[nextImage].setAttribute('data-active', '')
   }
+  
+  container.style.left = `${e.x}px`
+  container.style.top = `${e.y - this.offsetTop}px`
 }
 
 function resetImages (e) {
+  // if (this.classList.contains('active-project')) return
   const container = this.children[0]
   const index = parseInt(this.getAttribute('data-index'))
   container.children[imageActive[index]].removeAttribute('data-active')
   imageActive[index] = 0
+}
+
+function showContent () {
+  this.classList.toggle('active-project')
 }

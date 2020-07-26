@@ -59,3 +59,8 @@ li:before {
 
 .project-image[data-active] {
   opacity: 1; }
+
+.active-project > .more {
+  flex-wrap: wrap;
+  flex-direction: row;
+  display: flex; }
