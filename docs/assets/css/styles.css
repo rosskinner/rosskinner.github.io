@@ -45,12 +45,11 @@ li:before {
 
 .project-image-container {
   opacity: 0;
-  display: none;
-  z-index: -1; }
+  z-index: -1;
+  pointer-events: none; }
 
 .project-item:hover > .project-image-container {
-  opacity: 1;
-  display: block; }
+  opacity: 1; }
 
 .project-image {
   background-size: contain;
