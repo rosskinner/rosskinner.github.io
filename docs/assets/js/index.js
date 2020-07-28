@@ -2,6 +2,7 @@ let mousePos = { x: 0, y: 0 }
 let imageActive = []
 window.addEventListener('load', function () {
   const projects = document.getElementsByClassName('project-item')
+  // const container = document.getElementsByClassName('projects-container')
   Array.from(projects).forEach((project) => {
     imageActive.push(null)
     project.addEventListener('mouseenter', showImage, false)
@@ -47,8 +48,9 @@ function cycleImages (e) {
     container.children[nextImage].setAttribute('data-active', '')
   }
   
-  container.style.left = `${e.x}px`
-  container.style.top = `${e.y - this.offsetTop}px`
+  container.style.left = `${e.clientX}px`
+  container.style.top = `${e.clientY + window.pageYOffset}px`
+  // console.log(window.pageYOffset)
 }
 
 function resetImages (e) {

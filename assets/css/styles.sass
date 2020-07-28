@@ -8,7 +8,6 @@
 
 body
   font-family: 'Inter', sans-serif
-  font-weight: 300
   // letter-spacing: -0.01rem
 
 h1
@@ -54,13 +53,26 @@ li:before
   opacity: 0
   z-index: -1
   pointer-events: none
+  width: 500px
+  height: 500px
+
+.project-item
+  transition: color 0.3s ease-in-out
+  margin-top: -0.125rem
+
+.projects-container:hover .project-item
+  color: rgba(25,169,116, 0.5)
+
+.projects-container .project-item:hover
+  color: rgba(25,169,116, 1)
+
 
 .project-item:hover > .project-image-container
   opacity: 1
 
 .project-image
   background-size: contain
-  background-position: center
+  background-position: top left
   background-repeat: no-repeat
   opacity: 0
 
@@ -68,8 +80,7 @@ li:before
   opacity: 1
 
 .active-project > .more
-  flex-wrap: wrap
-  flex-direction: row
+  flex-direction: column
   display: flex
 
 // .active-project > .project-image-container
