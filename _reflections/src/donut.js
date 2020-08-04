@@ -1,7 +1,9 @@
 import * as THREE from 'three'
-import Stats from 'three/examples/jsm/libs/stats.module.js'
+// import Stats from 'three/examples/jsm/libs/stats.module.js'
 
-var camera, scene, renderer, object, stats
+const WIDTH = 900
+const HEIGHT = 900
+var camera, scene, renderer, object
 var planes, planeObjects, planeHelpers
 var clock
 var reflect, po
@@ -62,7 +64,7 @@ function init () {
 
   scene = new THREE.Scene()
 
-  camera = new THREE.PerspectiveCamera(36, window.innerWidth / window.innerHeight, 1, 100)
+  camera = new THREE.PerspectiveCamera(36, WIDTH / HEIGHT, 1, 100)
   camera.position.set(2, 2, 2)
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.5))
@@ -165,27 +167,27 @@ function init () {
   scene.add(ground)
 
   // Stats
-  stats = new Stats()
-  document.body.appendChild(stats.dom)
+  // stats = new Stats()
+  // document.body.appendChild(stats.dom)
 
   // Renderer
   renderer = new THREE.WebGLRenderer({ antialias: true })
   renderer.shadowMap.enabled = true
   renderer.setPixelRatio(window.devicePixelRatio)
-  renderer.setSize(600, 600)
+  renderer.setSize(WIDTH, HEIGHT)
   renderer.setClearColor(0xFFFFFF)
-  // window.addEventListener('resize', onWindowResize, false)
-  document.body.appendChild(renderer.domElement)
+  window.addEventListener('resize', onWindowResize, false)
+  document.getElementById('projects').appendChild(renderer.domElement)
+  // document.body.appendChild(renderer.domElement)
 
   renderer.localClippingEnabled = true
 }
 
-// function onWindowResize () {
-//   camera.aspect = window.innerWidth / window.innerHeight
-//   camera.updateProjectionMatrix()
-
-//   renderer.setSize(window.innerWidth, window.innerHeight)
-// }
+function onWindowResize () {
+  let width = WIDTH
+  if (window.innerWidth < WIDTH) width = window.innerWidth
+  renderer.setSize(width, width)
+}
 function animate () {
   var delta = clock.getDelta()
   requestAnimationFrame(animate)
@@ -205,9 +207,9 @@ function animate () {
     )
   }
 
-  stats.begin()
+  // stats.begin()
   renderer.render(scene, camera)
-  stats.end()
+  // stats.end()
 }
 
 function updateImage (img) {

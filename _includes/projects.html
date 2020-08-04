@@ -1,7 +1,7 @@
 {% assign list = site.projects | sort: 'date' | reverse %}
 
   {% for project in list %}
-    <article class='w-50 flex flex-row flex-wrap items-start ws-normal project-item' data-index={{ forloop.index0 }} alt='{{ project.title }}' title='{{ project.title }}' >
+    <article class='w-100 w-70-m w-50-ns flex flex-row flex-wrap items-start ws-normal project-item' data-index={{ forloop.index0 }} alt='{{ project.title }}' title='{{ project.title }}' >
       <!-- <div class='w-100 h-100 top-0 left-0 project-image project-image-container absolute' style='background-image: url({{project.permalink}}/1.jpg)' ></div> -->
       
       <div class='top-0 left-0 w-100 project-image-container absolute' data-index={{ forloop.index0 }}>
@@ -14,7 +14,7 @@
       {% endfor %}
       </div>
       <div>
-        <span class='f1 fw5 ma0 pointer project-title'>{{project.title}}</span>
+        <span class='f2 f2-m f1-ns fw5 ma0 pointer project-title'>{{project.title}}</span>
       </div>
       <div class='w-50 dn more bottom-1 right-0'>
         <div class='w-100 ph3'>
