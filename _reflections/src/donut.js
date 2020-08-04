@@ -186,11 +186,9 @@ function init () {
 
 //   renderer.setSize(window.innerWidth, window.innerHeight)
 // }
-
 function animate () {
   var delta = clock.getDelta()
-
-  requestAnimationFrame(animate)
+  window.requestAnimationFrame(animate)
 
   object.rotation.x += delta * 0.5
   object.rotation.y += delta * 0.2

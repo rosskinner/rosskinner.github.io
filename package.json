@@ -43,6 +43,7 @@
   },
   "standard": {
     "parser": "babel-eslint",
+    "ignorePatterns": ["index.bundle.js", "**/docs/*.js"],
     "globals": [
       "$",
       "Typed"
