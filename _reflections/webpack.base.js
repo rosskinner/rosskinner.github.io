@@ -9,8 +9,8 @@ module.exports = function (env, args) {
       index: path.join(__dirname, `./src/index.js`)
     },
     output: {
-      path: path.join(__dirname, '../docs/assets/reflections'),
-      publicPath: '/assets/reflections/',
+      path: path.join(__dirname, '../assets/js/'),
+      publicPath: '/assets/js',
       filename: `[name].js`,
       chunkFilename: '[name].js'
     },

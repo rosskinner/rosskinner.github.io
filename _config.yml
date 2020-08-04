@@ -76,6 +76,4 @@ defaults:
       type: projects
     values:
       layout: project
-keep_files:
-  - assets/reflections
 

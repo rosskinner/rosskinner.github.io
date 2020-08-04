@@ -44,7 +44,8 @@
   "standard": {
     "parser": "babel-eslint",
     "ignore": [
-      "/docs/"
+      "/assets/js/",
+      "/docs/assets/js/"
     ],
     "globals": [
       "$",
