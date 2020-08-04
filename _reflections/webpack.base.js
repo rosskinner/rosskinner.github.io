@@ -11,8 +11,8 @@ module.exports = function (env, args) {
     output: {
       path: path.join(__dirname, '../docs/assets/reflections'),
       publicPath: '/assets/reflections/',
-      filename: `[name].bundle.js`,
-      chunkFilename: '[name].bundle.js'
+      filename: `[name].js`,
+      chunkFilename: '[name].js'
     },
     resolve: {
       extensions: ['.js', '.jsx']
