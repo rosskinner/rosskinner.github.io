@@ -181,6 +181,7 @@ function init () {
   // document.body.appendChild(renderer.domElement)
 
   renderer.localClippingEnabled = true
+  onWindowResize()
 }
 
 function onWindowResize () {
