@@ -8,3 +8,4 @@ docker run --name jekyll-serve --rm -it \
   -v "$(pwd):/srv/jekyll:cached" \
   jekyll/jekyll:3.8.5 \
   sh -c 'bundle check --path vendor/bundle || bundle install --path vendor/bundle ; bundle exec jekyll serve --watch --incremental -H 0.0.0.0'
+

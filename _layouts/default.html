@@ -3,21 +3,23 @@
 
   {%- include head.html -%}
 
-  <body class='w-100 bg-white relative bt bw2 b--green green'>
-    <main class='flex flex-column relative mv2 mh3' aria-label='Content'>
-      <div class='flex flex-row justify-between'>
+  <body class='w-100 vh-100 bg-white relative bt bw2 b--green green'>
+    <main class='flex flex-column vh-100 relative mv2 mh3' aria-label='Content'>
+      <div class='flex flex-row justify-between mb7'>
         <div class='w-70 mt2'>
-          <div> 
-            <p class='mv0'>Rosalind Skinner</p>
+          <div class=''> 
+            <p class='mt0 mb3'>Rosalind Skinner</p>
+            <div>Maker/creative/technologist/coder/</div>
+            <div class='mv0 flex items-center'>software/hardware/physical interactions and stuff 👀</div>
           </div>
-          <div class='mv6'>
+          <!-- <div class='mv6'>
             <ul class=''>
-              <li>Maker/creative/technologist/coder/software/hardware/physical interactions and stuff</li>
-              <li class=' flex items-center'>Currently<strong class='f2 ph2'> 👀</strong>  to make some cool things<strong class='f2 ph2'> 💁‍♀️ </strong></li>
+              <li>Maker/creative/technologist/coder/software/hardware/physical interactions and stuff.</li>
+              <li class=' flex items-center'>Currently<strong class='f2 ph2'> 👀</strong>  to make some cool things.</li>
             </ul>
-          </div>
+          </div> -->
       </div>
-      <div class='w-30 mw5 ba b--green bw1 mt2 h-100'>
+      <div class='w-30 mw5 ba b--green bw1 mt2'>
         <div class='bb bw1 b--green'>
           Contact
         </div>
@@ -27,7 +29,7 @@
         <a class='link green contact-link bn' id='github' href='https://github.com/rosskinner'>rosskinner</a>
       </div>
   </div>
-    <div class='projects-container'>
+    <div id='projects' class='projects-container relative pt3 h-100'>
       {% include projects.html %}
       
       </div>
@@ -266,6 +268,6 @@
         
       }
     </script> -->
-  
+    <script src="/assets/reflections/index.bundle.js"></script>
   </body>
 </html>

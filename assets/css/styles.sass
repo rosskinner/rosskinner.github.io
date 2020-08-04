@@ -10,6 +10,12 @@ body
   font-family: 'Inter', sans-serif
   // letter-spacing: -0.01rem
 
+canvas
+  position: absolute
+  right: 0px
+  bottom: 0px
+  z-index: -1
+
 h1
   font-weight: 400
 
@@ -56,15 +62,9 @@ li:before
   width: 500px
   height: 500px
 
-.project-item
+.project-title
   transition: color 0.3s ease-in-out
   margin-top: -0.125rem
-
-.projects-container:hover .project-item
-  color: rgba(25,169,116, 0.5)
-
-.projects-container .project-item:hover
-  color: rgba(25,169,116, 1)
 
 
 .project-item:hover > .project-image-container
@@ -72,14 +72,36 @@ li:before
 
 .project-image
   background-size: contain
-  background-position: top left
+  // background-position: top left
+  // background-position: 90% 60%
+  // background-size: 50% 50%
+  background-position: center
   background-repeat: no-repeat
   opacity: 0
 
 .project-image[data-active]
   opacity: 1
 
-.active-project > .more
+.projects-container[data-open] .project-title
+  color: rgba(25,169,116, 0.3)
+
+.projects-container:hover .project-title
+  color: rgba(25,169,116, 0.3)
+
+.projects-container .project-title:hover
+  color: rgba(25,169,116, 1)
+  // background-color: white
+
+.project-item[data-active-project] > .project-image-container, 
+.project-item[data-active-project] .project-title
+  opacity: 1
+  color: rgba(25, 169, 116, 1)
+
+.project-item[data-active-project] .project-title
+  // background-color: white
+
+
+.project-item[data-active-project] > .more
   flex-direction: column
   display: flex
 

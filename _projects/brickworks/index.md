@@ -5,7 +5,7 @@ description: Some More Cool Shit
 permalink: /projects/brickworks
 date: 2019-12-12 14:00:00 +1000
 stack: [Bela IO, C#]
-images: [1,2]
+images: [0,1,2]
 delivery: [Physical Prototype]
 links:
     ["https://www.google.com"]

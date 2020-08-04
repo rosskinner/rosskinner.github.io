@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Rosalind Skinner - Portfolio 2019",
   "scripts": {
-    "lint": "./node_modules/.bin/standard"
+    "ref:dev": "webpack --config ./_reflections/webpack.base.js --env development",
+    "ref:build": "webpack --config ./_reflections/webpack.base.js --env production",
+    "lint": "./node_modules/.bin/standard",
+    "build": "npm run ref:build"
   },
   "author": "Rosalind Skinner",
   "license": "ISC",
@@ -32,12 +35,11 @@
     "gsap": "^2.0.2",
     "howler": "^2.1.1",
     "immutable": "^4.0.0-rc.12",
-    "matter-js": "^0.14.2",
-    "pixi.js": "^4.8.5",
     "poly-decomp": "^0.3.0",
     "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
-    "stats.js": "^0.17.0"
+    "stats.js": "^0.17.0",
+    "three": "^0.119.1"
   },
   "standard": {
     "parser": "babel-eslint",
