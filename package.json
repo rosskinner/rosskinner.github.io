@@ -43,10 +43,13 @@
   },
   "standard": {
     "parser": "babel-eslint",
-    "ignorePatterns": ["index.bundle.js", "**/docs/*.js"],
+    "ignore": [
+      "/docs/"
+    ],
     "globals": [
       "$",
-      "Typed"
+      "Typed",
+      "requestAnimationFrame"
     ]
   },
   "pre-commit": [

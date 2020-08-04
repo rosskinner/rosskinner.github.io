@@ -188,7 +188,7 @@ function init () {
 // }
 function animate () {
   var delta = clock.getDelta()
-  window.requestAnimationFrame(animate)
+  requestAnimationFrame(animate)
 
   object.rotation.x += delta * 0.5
   object.rotation.y += delta * 0.2
