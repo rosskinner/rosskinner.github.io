@@ -27,8 +27,6 @@ window.onload = () => {
     project.addEventListener('mouseenter', hoverImage, false)
     project.addEventListener('mouseleave', hoverOffImage, false)
     html2canvas(project).then(canvas => {
-      // document.body.appendChild(canvas)
-      // canvas.width = canvas.height
       const image = canvas.toDataURL()
       const sizeWidth = nearestPow2(canvas.width)
       const sizeHeight = sizeWidth * (canvas.height / canvas.width)
@@ -42,17 +40,15 @@ window.onload = () => {
       newCanvas.height = sizeWidth
 
       const ctx = newCanvas.getContext('2d')
-      ctx.fillStyle = 0xffffff
+      ctx.fillStyle = '#ffffff'
+      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
       img.onload = () => {
         for (let i = 0; i < iteration; i++) {
           ctx.drawImage(img, 0, sizeHeight * i, sizeWidth, sizeHeight)
         }
-        console.log(newCanvas.width)
         const imageUrl = newCanvas.toDataURL()
         images.push(imageUrl)
-        // document.body.appendChild(newCanvas)
-        // image.height = window.innerWidth
         if (index === projects.length - 1) {
           donut.init(images)
           donut.animate()
