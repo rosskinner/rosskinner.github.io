@@ -1,21 +1,24 @@
 import * as THREE from 'three'
 // import Stats from 'three/examples/jsm/libs/stats.module.js'
 
-const WIDTH = 900
-const HEIGHT = 900
+const WIDTH = 800
+const HEIGHT = 800
+// const WIDTH = window.innerWidth
+// const HEIGHT = window.innerHeight
 var camera, scene, renderer, object
 var planes, planeObjects, planeHelpers
-var clock
+// var clock
 var reflect, po
 var clippedColorFront
+var textures
 
 var params = {
   animate: true,
   0: {
-    constant: 0.4
+    constant: 1
   },
   1: {
-    constant: 0.3
+    constant: 1
   },
   2: {
     constant: 0.8
@@ -59,23 +62,26 @@ function createPlaneStencilGroup (geometry, plane, renderOrder) {
   return group
 }
 
-function init () {
-  clock = new THREE.Clock()
+function init (images) {
+  textures = images
+  // clock = new THREE.Clock()
 
   scene = new THREE.Scene()
 
-  camera = new THREE.PerspectiveCamera(36, WIDTH / HEIGHT, 1, 100)
-  camera.position.set(2, 2, 2)
+  camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 1, 100)
+  camera.position.set(0, 0, -2)
+  // camera.rotateX(1.5)
+  // camera.rotateY(3)
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.5))
 
   var dirLight = new THREE.DirectionalLight(0xffffff, 1)
   dirLight.position.set(5, 10, 7.5)
-  dirLight.castShadow = true
-  dirLight.shadow.camera.right = 2
-  dirLight.shadow.camera.left = -2
-  dirLight.shadow.camera.top = 2
-  dirLight.shadow.camera.bottom = -2
+  // dirLight.castShadow = true
+  // dirLight.shadow.camera.right = 2
+  // dirLight.shadow.camera.left = -2
+  // dirLight.shadow.camera.top = 2
+  // dirLight.shadow.camera.bottom = -2
 
   dirLight.shadow.mapSize.width = 1024
   dirLight.shadow.mapSize.height = 1024
@@ -101,13 +107,20 @@ function init () {
   planeObjects = []
   var planeGeom = new THREE.PlaneBufferGeometry(4, 4)
 
-  var tex = document.getElementsByClassName('texture')[0].src
+  var tex = textures[0]
   reflect = new THREE.CubeTextureLoader().load([tex, tex, tex, tex, tex, tex])
-  reflect.wrapS = THREE.RepeatWrapping
-  reflect.wrapT = THREE.RepeatWrapping
-  reflect.needsUpdate = true
-
+  console.log(reflect)
+  // reflect.wrapS = THREE.ClampToEdgeWrapping
+  // reflect.wrapT = THREE.ClampToEdgeWrapping
+  // reflect.rotation = 1.5
+  // reflect.wrapS = 2
+  // reflect.wrapT = 2
+  // reflect.wrapS = THREE.RepeatWrapping
+  // reflect.wrapT = THREE.RepeatWrapping
+  // reflect.needsUpdate = true
+  // scene.rotateY(3)
   // scene.background = reflect
+  // scene.background.rotation.y = 1.5
   for (var i = 0; i < 3; i++) {
     var poGroup = new THREE.Group()
     var plane = planes[ i ]
@@ -141,14 +154,17 @@ function init () {
     scene.add(poGroup)
   }
 
-  var material = new THREE.MeshStandardMaterial({
+  var material = new THREE.MeshBasicMaterial({
     envMap: reflect,
-    metalness: 1,
-    roughness: 0,
+    // metalness: 1,
+    // roughness: 0,
+    refractionRatio: 0.1,
     clippingPlanes: planes,
     clipShadows: true,
     shadowSide: THREE.DoubleSide
   })
+  material.envMap.mapping = THREE.CubeRefractionMapping
+  console.log(material)
 
   // add the color
   clippedColorFront = new THREE.Mesh(geometry, material)
@@ -190,12 +206,13 @@ function onWindowResize () {
   renderer.setSize(width, width)
 }
 function animate () {
-  var delta = clock.getDelta()
+  // var delta = clock.getDelta()
   requestAnimationFrame(animate)
 
-  object.rotation.x += delta * 0.5
-  object.rotation.y += delta * 0.2
+  // object.rotation.x += delta * 0.5
+  // object.rotation.y += delta * 0.2
   camera.lookAt(object.position)
+  // console.log(camera.rotation)
 
   for (var i = 0; i < planeObjects.length; i++) {
     var plane = planes[ i ]
@@ -213,9 +230,11 @@ function animate () {
   // stats.end()
 }
 
-function updateImage (img) {
-  if (clippedColorFront.material.envMap.image[0] === img) return
+function updateImage (index) {
+  if (clippedColorFront.material.envMap.image[0] === textures[index]) return
+  const img = textures[index]
   reflect = new THREE.CubeTextureLoader().load([img, img, img, img, img, img])
+  // scene.background = reflect
   // clippedColorFront.material.envMap.image = [img, img, img, img, img, img]
   clippedColorFront.material.envMap = reflect
   for (var i = 0; i < planeObjects.length; i++) {

@@ -34,6 +34,7 @@
     "debounce": "^1.2.0",
     "gsap": "^2.0.2",
     "howler": "^2.1.1",
+    "html2canvas": "^1.0.0-rc.5",
     "immutable": "^4.0.0-rc.12",
     "poly-decomp": "^0.3.0",
     "redux": "^4.0.1",
@@ -50,7 +51,8 @@
     "globals": [
       "$",
       "Typed",
-      "requestAnimationFrame"
+      "requestAnimationFrame",
+      "Image"
     ]
   },
   "pre-commit": [
