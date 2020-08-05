@@ -1,16 +1,19 @@
 import * as THREE from 'three'
+// import im from '../../assets/test.jpg'
 // import Stats from 'three/examples/jsm/libs/stats.module.js'
 
 const WIDTH = 800
 const HEIGHT = 800
 // const WIDTH = window.innerWidth
 // const HEIGHT = window.innerHeight
+const textures = []
+const reflections = []
 var camera, scene, renderer, object
 var planes, planeObjects, planeHelpers
-// var clock
+var clock
 var reflect, po
 var clippedColorFront
-var textures
+// const tex = '/assets/test.jpg'
 
 var params = {
   animate: true,
@@ -63,13 +66,12 @@ function createPlaneStencilGroup (geometry, plane, renderOrder) {
 }
 
 function init (images) {
-  textures = images
-  // clock = new THREE.Clock()
+  clock = new THREE.Clock()
 
   scene = new THREE.Scene()
 
   camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 1, 100)
-  camera.position.set(0, 0, -2)
+  camera.position.set(1, 0, 2)
   // camera.rotateX(1.5)
   // camera.rotateY(3)
 
@@ -98,7 +100,7 @@ function init (images) {
     ph.visible = false
     scene.add(ph)
   })
-
+  // var geometry = new THREE.CylinderBufferGeometry(0.1, 0.1, 1, 200)
   var geometry = new THREE.TorusKnotBufferGeometry(0.4, 0.15, 220, 60, 1, 1)
   object = new THREE.Group()
   scene.add(object)
@@ -107,20 +109,6 @@ function init (images) {
   planeObjects = []
   var planeGeom = new THREE.PlaneBufferGeometry(4, 4)
 
-  var tex = textures[0]
-  reflect = new THREE.CubeTextureLoader().load([tex, tex, tex, tex, tex, tex])
-  console.log(reflect)
-  // reflect.wrapS = THREE.ClampToEdgeWrapping
-  // reflect.wrapT = THREE.ClampToEdgeWrapping
-  // reflect.rotation = 1.5
-  // reflect.wrapS = 2
-  // reflect.wrapT = 2
-  // reflect.wrapS = THREE.RepeatWrapping
-  // reflect.wrapT = THREE.RepeatWrapping
-  // reflect.needsUpdate = true
-  // scene.rotateY(3)
-  // scene.background = reflect
-  // scene.background.rotation.y = 1.5
   for (var i = 0; i < 3; i++) {
     var poGroup = new THREE.Group()
     var plane = planes[ i ]
@@ -153,16 +141,37 @@ function init (images) {
     planeObjects.push(po)
     scene.add(poGroup)
   }
+  // console.log(textures[0])
+  for (let i = 0; i < images.length; i++) {
+    const tex = images[i]
+    // console.log(im)
+
+    var texa = new THREE.TextureLoader().load(tex)
+    reflect = new THREE.CubeTextureLoader().load([tex, tex, tex, tex, tex, tex])
+    texa.wrapS = THREE.RepeatWrapping
+    texa.wrapT = THREE.RepeatWrapping
+    texa.repeat.set(2, 2)
+    texa.needsUpdate = true
+    texa.anisotropy = 0
+    texa.magFilter = THREE.NearestFilter
+    texa.minFilter = THREE.NearestFilter
+    textures.push(texa)
+    reflections.push(reflect)
+  }
 
   var material = new THREE.MeshBasicMaterial({
-    envMap: reflect,
+    envMap: reflections[0],
     // metalness: 1,
     // roughness: 0,
-    refractionRatio: 0.1,
+    // map: textures[0],
+    // transparent: true,
+    refractionRatio: 0.2,
     clippingPlanes: planes,
     clipShadows: true,
     shadowSide: THREE.DoubleSide
   })
+
+  // material.envMap.transparent = true
   material.envMap.mapping = THREE.CubeRefractionMapping
   console.log(material)
 
@@ -206,11 +215,11 @@ function onWindowResize () {
   renderer.setSize(width, width)
 }
 function animate () {
-  // var delta = clock.getDelta()
+  var delta = clock.getDelta()
   requestAnimationFrame(animate)
 
-  // object.rotation.x += delta * 0.5
-  // object.rotation.y += delta * 0.2
+  object.rotation.x += delta * 0.5
+  object.rotation.y += delta * 0.2
   camera.lookAt(object.position)
   // console.log(camera.rotation)
 
@@ -231,16 +240,17 @@ function animate () {
 }
 
 function updateImage (index) {
-  if (clippedColorFront.material.envMap.image[0] === textures[index]) return
-  const img = textures[index]
-  reflect = new THREE.CubeTextureLoader().load([img, img, img, img, img, img])
-  // scene.background = reflect
-  // clippedColorFront.material.envMap.image = [img, img, img, img, img, img]
-  clippedColorFront.material.envMap = reflect
-  for (var i = 0; i < planeObjects.length; i++) {
-    var plane = planeObjects[ i ]
-    plane.material.envMap = reflect
-  }
+  // if (clippedColorFront.material.envMap.image[0] === textures[index]) return
+  // var texa = new THREE.TextureLoader().load(img)
+  clippedColorFront.material.map = textures[index]
+  // reflect = new THREE.CubeTextureLoader().load([img, img, img, img, img, img])
+  // // scene.background = reflect
+  // // clippedColorFront.material.envMap.image = [img, img, img, img, img, img]
+  // clippedColorFront.material.envMap = reflect
+  // for (var i = 0; i < planeObjects.length; i++) {
+  //   var plane = planeObjects[ i ]
+  //   plane.material.envMap = reflect
+  // }
 }
 
 export {

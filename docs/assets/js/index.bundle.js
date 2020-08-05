@@ -99,18 +99,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return animate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateImage", function() { return updateImage; });
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
- // import Stats from 'three/examples/jsm/libs/stats.module.js'
+ // import im from '../../assets/test.jpg'
+// import Stats from 'three/examples/jsm/libs/stats.module.js'
 
 var WIDTH = 800;
 var HEIGHT = 800; // const WIDTH = window.innerWidth
 // const HEIGHT = window.innerHeight
 
+var textures = [];
+var reflections = [];
 var camera, scene, renderer, object;
 var planes, planeObjects, planeHelpers;
 var clock;
 var reflect, po;
-var clippedColorFront;
-var textures;
+var clippedColorFront; // const tex = '/assets/test.jpg'
+
 var params = {
   animate: true,
   0: {
@@ -156,11 +159,10 @@ function createPlaneStencilGroup(geometry, plane, renderOrder) {
 }
 
 function init(images) {
-  textures = images;
   clock = new three__WEBPACK_IMPORTED_MODULE_0__["Clock"]();
   scene = new three__WEBPACK_IMPORTED_MODULE_0__["Scene"]();
   camera = new three__WEBPACK_IMPORTED_MODULE_0__["PerspectiveCamera"](45, WIDTH / HEIGHT, 1, 100);
-  camera.position.set(0, 0, -2); // camera.rotateX(1.5)
+  camera.position.set(1, 0, 2); // camera.rotateX(1.5)
   // camera.rotateY(3)
 
   scene.add(new three__WEBPACK_IMPORTED_MODULE_0__["AmbientLight"](0xffffff, 0.5));
@@ -181,26 +183,14 @@ function init(images) {
   planeHelpers.forEach(function (ph) {
     ph.visible = false;
     scene.add(ph);
-  });
+  }); // var geometry = new THREE.CylinderBufferGeometry(0.1, 0.1, 1, 200)
+
   var geometry = new three__WEBPACK_IMPORTED_MODULE_0__["TorusKnotBufferGeometry"](0.4, 0.15, 220, 60, 1, 1);
   object = new three__WEBPACK_IMPORTED_MODULE_0__["Group"]();
   scene.add(object); // Set up clip plane rendering
 
   planeObjects = [];
   var planeGeom = new three__WEBPACK_IMPORTED_MODULE_0__["PlaneBufferGeometry"](4, 4);
-  var tex = textures[0];
-  reflect = new three__WEBPACK_IMPORTED_MODULE_0__["CubeTextureLoader"]().load([tex, tex, tex, tex, tex, tex]);
-  console.log(reflect); // reflect.wrapS = THREE.ClampToEdgeWrapping
-  // reflect.wrapT = THREE.ClampToEdgeWrapping
-  // reflect.rotation = 1.5
-  // reflect.wrapS = 2
-  // reflect.wrapT = 2
-  // reflect.wrapS = THREE.RepeatWrapping
-  // reflect.wrapT = THREE.RepeatWrapping
-  // reflect.needsUpdate = true
-  // scene.rotateY(3)
-  // scene.background = reflect
-  // scene.background.rotation.y = 1.5
 
   for (var i = 0; i < 3; i++) {
     var poGroup = new three__WEBPACK_IMPORTED_MODULE_0__["Group"]();
@@ -235,17 +225,37 @@ function init(images) {
     poGroup.add(po);
     planeObjects.push(po);
     scene.add(poGroup);
+  } // console.log(textures[0])
+
+
+  for (var _i = 0; _i < images.length; _i++) {
+    var tex = images[_i]; // console.log(im)
+
+    var texa = new three__WEBPACK_IMPORTED_MODULE_0__["TextureLoader"]().load(tex);
+    reflect = new three__WEBPACK_IMPORTED_MODULE_0__["CubeTextureLoader"]().load([tex, tex, tex, tex, tex, tex]);
+    texa.wrapS = three__WEBPACK_IMPORTED_MODULE_0__["RepeatWrapping"];
+    texa.wrapT = three__WEBPACK_IMPORTED_MODULE_0__["RepeatWrapping"];
+    texa.repeat.set(2, 2);
+    texa.needsUpdate = true;
+    texa.anisotropy = 0;
+    texa.magFilter = three__WEBPACK_IMPORTED_MODULE_0__["NearestFilter"];
+    texa.minFilter = three__WEBPACK_IMPORTED_MODULE_0__["NearestFilter"];
+    textures.push(texa);
+    reflections.push(reflect);
   }
 
   var material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({
-    envMap: reflect,
+    envMap: reflections[0],
     // metalness: 1,
     // roughness: 0,
-    refractionRatio: 0.1,
+    // map: textures[0],
+    // transparent: true,
+    refractionRatio: 0.2,
     clippingPlanes: planes,
     clipShadows: true,
     shadowSide: three__WEBPACK_IMPORTED_MODULE_0__["DoubleSide"]
-  });
+  }); // material.envMap.transparent = true
+
   material.envMap.mapping = three__WEBPACK_IMPORTED_MODULE_0__["CubeRefractionMapping"];
   console.log(material); // add the color
 
@@ -289,9 +299,9 @@ function onWindowResize() {
 
 function animate() {
   var delta = clock.getDelta();
-  requestAnimationFrame(animate); // object.rotation.x += delta * 0.5
-  // object.rotation.y += delta * 0.2
-
+  requestAnimationFrame(animate);
+  object.rotation.x += delta * 0.5;
+  object.rotation.y += delta * 0.2;
   camera.lookAt(object.position); // console.log(camera.rotation)
 
   for (var i = 0; i < planeObjects.length; i++) {
@@ -306,17 +316,16 @@ function animate() {
 }
 
 function updateImage(index) {
-  if (clippedColorFront.material.envMap.image[0] === textures[index]) return;
-  var img = textures[index];
-  reflect = new three__WEBPACK_IMPORTED_MODULE_0__["CubeTextureLoader"]().load([img, img, img, img, img, img]); // scene.background = reflect
-  // clippedColorFront.material.envMap.image = [img, img, img, img, img, img]
-
-  clippedColorFront.material.envMap = reflect;
-
-  for (var i = 0; i < planeObjects.length; i++) {
-    var plane = planeObjects[i];
-    plane.material.envMap = reflect;
-  }
+  // if (clippedColorFront.material.envMap.image[0] === textures[index]) return
+  // var texa = new THREE.TextureLoader().load(img)
+  clippedColorFront.material.map = textures[index]; // reflect = new THREE.CubeTextureLoader().load([img, img, img, img, img, img])
+  // // scene.background = reflect
+  // // clippedColorFront.material.envMap.image = [img, img, img, img, img, img]
+  // clippedColorFront.material.envMap = reflect
+  // for (var i = 0; i < planeObjects.length; i++) {
+  //   var plane = planeObjects[ i ]
+  //   plane.material.envMap = reflect
+  // }
 }
 
 
@@ -362,8 +371,6 @@ window.onload = function () {
     project.addEventListener('mouseenter', hoverImage, false);
     project.addEventListener('mouseleave', hoverOffImage, false);
     html2canvas__WEBPACK_IMPORTED_MODULE_1___default()(project).then(function (canvas) {
-      // document.body.appendChild(canvas)
-      // canvas.width = canvas.height
       var image = canvas.toDataURL();
       var sizeWidth = nearestPow2(canvas.width);
       var sizeHeight = sizeWidth * (canvas.height / canvas.width);
@@ -374,17 +381,16 @@ window.onload = function () {
       newCanvas.width = sizeWidth;
       newCanvas.height = sizeWidth;
       var ctx = newCanvas.getContext('2d');
-      ctx.fillStyle = 0xffffff;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
       img.onload = function () {
         for (var i = 0; i < iteration; i++) {
           ctx.drawImage(img, 0, sizeHeight * i, sizeWidth, sizeHeight);
         }
 
-        console.log(newCanvas.width);
         var imageUrl = newCanvas.toDataURL();
-        images.push(imageUrl); // document.body.appendChild(newCanvas)
-        // image.height = window.innerWidth
+        images.push(imageUrl);
 
         if (index === projects.length - 1) {
           _donut__WEBPACK_IMPORTED_MODULE_0__["init"](images);
@@ -392,9 +398,7 @@ window.onload = function () {
         }
       };
     });
-  }); // for (let i = 0; i < document.getElementById('projects').children.length; i++) {
-  //   const project = array[i]
-  // }
+  });
 };
 
 /***/ }),
