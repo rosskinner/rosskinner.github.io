@@ -4,6 +4,10 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+.georgia {
+  font-family: 'Georgia', serif;
+}
+
 canvas {
   position: absolute;
   right: 0px;
@@ -21,28 +25,30 @@ p {
   word-wrap: break-word;
 }
 
+.project-hero {
+  height: calc(100vh - 1rem);
+  min-height: 600px;
+}
+
+.mwImage {
+  max-width: 38rem;
+}
+
 .project-title {
-  transition: color 0.3s ease-in-out;
-  margin-top: -0.125rem;
+  width: 60px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0rem;
 }
 
-.project.open > .more {
-  flex-direction: column;
-  display: flex;
+.project-title h1 {
+  transform: rotate(-90deg) translateZ(0);
+  transform-origin: left center;
+  width: 800px;
+  left: 1.5rem;
+  position: absolute;
+  top: 805px;
 }
 
-.hero-container {
-  height: calc(100vh - 160px);
-}
-
-.hero-background {
-  background-position: center;
-  background-size: cover;
-}
-
-.hero-image {
-  background-position: center;
-  background-size: 500px;
-  background-repeat: no-repeat;
-}
 

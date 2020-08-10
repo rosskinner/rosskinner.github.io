@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { getProjects } from '../store/selectors'
 import { store } from '../store'
 import { Link } from 'react-router-dom'
@@ -35,7 +35,7 @@ export default function ProjectsPage (props) {
     )
   })
   return (
-    <div>
+    <Fragment>
       <article className='w-100 flex flex-wrap pointer mb4 bb'>
         <div className='w-40'>
           <p>Project</p>
@@ -48,6 +48,6 @@ export default function ProjectsPage (props) {
         </div>
       </article>
       {projectList}
-    </div>
+    </Fragment>
   )
 }
