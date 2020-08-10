@@ -65,7 +65,7 @@ export default function ProjectPage (props) {
             </div>
           </div>
           <div className='w-100 flex flex-column justify-center items-center'>
-            <div className='project-content flex flex-row w-100 mw8 mb4'>
+            <div className='project-content flex flex-row w-100 mb4 mw8'>
             
               <div className='w-50'>
                 <p>
