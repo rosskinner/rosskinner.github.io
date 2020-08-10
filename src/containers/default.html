@@ -1,17 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="format-detection" content="telephone=no">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/tachyons.min.css">
-</head>
-<body class='w-100 bg-white relative bt bw2 b--green green'>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
+  {%- include head.html -%}
+
+  <body class='w-100 bg-white relative bt bw2 b--green green'>
     <main class='flex flex-column relative ma3' aria-label='Content'>
       <div class='flex flex-row justify-between mb4'>
         <div class='w-70 mt2'>
@@ -20,7 +12,7 @@
           </div>
       </div>
   </div>
-      
+      {{ content }}
       <div class='w-100 fixed bottom-0 left-0'>
         <div class='w-100 mt2 flex justify-between'>
           <a class='link black ma3' href='mailto:ros.skinner@gmail.com'>Email</a>

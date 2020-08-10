@@ -1,0 +1,13 @@
+{
+  "title": "Australian Sports Museum",
+  "hero": ["background", 1],
+  "info": "Exhibition",
+  "description": "Some More Cool Shit - I made all of the things in this exhibition. it was great. you should go see it. Some More Cool Shit - I made all of the things in this exhibition. it was great. you should go see it. Some More Cool Shit - I made all of the things in this exhibition. it was great. you should go see it.",
+  "permalink": "/australian-sports-museum",
+  "images": [1,2,3,4,5],
+  "date": "2020",
+  "stack": ["javascript", "Electron", "Three JS"],
+  "delivery": ["Windows Application", "Network"],
+  "links": ["https://www.google.com"]
+}
+

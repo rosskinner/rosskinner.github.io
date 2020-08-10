@@ -1,0 +1,11 @@
+{
+  "title": "MOD Cascade",
+  "info": "Art Installation",
+  "description": "Some Cool Shit",
+  "permalink": "/mod",
+  "date": "2019",
+  "stack": ["javascript", "Electron", "Three JS"],
+  "images": [0,1,2,3,4],
+  "delivery": ["Windows Application", "Network"],
+  "links": ["https://www.google.com"]
+}

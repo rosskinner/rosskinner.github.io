@@ -1,0 +1,12 @@
+
+{
+  "title": "Ghosts, Toast and the Things Unsaid",
+  "info": "Digital Theatre",
+  "description": "Some More Cool Shit",
+  "permalink": "/ghosts",
+  "date": "2016",
+  "stack": ["Bela IO", "C#"],
+  "images": [1,2,3],
+  "delivery": ["Windows Application", "Network"],
+  "links": ["https://www.google.com"]
+}

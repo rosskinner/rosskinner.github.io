@@ -1,0 +1,11 @@
+{
+"title": "Road To Zero Foyer",
+"info": "Exhibition",
+"description": "Some More Cool Shit",
+"permalink": "/road-to-zero",
+"date": "2018",
+"stack": ["Bela IO", "C#"],
+"images": [0,1,2,3,4],
+"delivery": ["Windows Application", "Network"],
+"links": ["https://www.google.com"]
+}

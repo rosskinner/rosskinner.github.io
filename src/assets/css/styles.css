@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+canvas {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: -1;
+}
+
+h1 {
+  font-weight: 400;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1rem;
+  word-wrap: break-word;
+}
+
+.project-title {
+  transition: color 0.3s ease-in-out;
+  margin-top: -0.125rem;
+}
+
+.project.open > .more {
+  flex-direction: column;
+  display: flex;
+}
+
+.hero-container {
+  height: calc(100vh - 160px);
+}
+
+.hero-background {
+  background-position: center;
+  background-size: cover;
+}
+
+.hero-image {
+  background-position: center;
+  background-size: 500px;
+  background-repeat: no-repeat;
+}
+
