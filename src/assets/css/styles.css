@@ -4,6 +4,10 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+a {
+  outline: 0;
+}
+
 .georgia {
   font-family: 'Georgia', serif;
 }
@@ -50,5 +54,54 @@ p {
   position: absolute;
   top: 805px;
 }
+
+.page-enter {
+  opacity: 0;
+}
+
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+
+.page-exit {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 400ms;
+}
+
+
+/* .page-enter,
+.page-exit {
+  transition: opacity 1000ms ease-out;
+}
+
+.page-enter {
+  opacity: 1;
+}
+
+.page-enter.page-enter-active {
+  opacity: 0;
+}
+
+.page-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+} */
+
 
 

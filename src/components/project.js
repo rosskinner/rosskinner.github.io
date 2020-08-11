@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { getProject } from '../store/selectors'
 import { store } from '../store'
 import { Link } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 
 export default function ProjectPage (props) {
   const [project, setProject] = useState(null)
@@ -32,7 +33,9 @@ export default function ProjectPage (props) {
 
     data.images.forEach((item, key) => {
       const src = require(`../_projects${data.permalink}/${item}.jpg`).default
-      i.push(<img className='w-100 mv2' key={key} src={src} />)
+      let padding = 'mb3'
+      if (key === data.images.length -1) padding = ''
+      i.push(<img className={`w-100 mt4 ${padding}`} key={key} src={src} />)
     })
     setImages(i)
   }
@@ -45,58 +48,58 @@ export default function ProjectPage (props) {
   }
   useEffect(() => {
     fetchProject()
-  })
+  },[])
   
 
-  console.log(project)
+  // console.log(project)
   const projectLoaded = project !== null
-
+  // console.log('projectLoaded', projectLoaded)
 
   return (
-    <Fragment>
-      {projectLoaded &&
-        <div className='project-container w-100 pa4'>
-          <div className='project-title tr'>
-            <h1 className='pr5 f3'>{project.title}</h1>
-          </div>
-          <div className='w-100 flex items-center justify-center project-hero'>
-            <div className='w-100 mwImage'>
-              <img className='w-100 mv2' src={require(`../_projects${project.permalink}/${project.hero}`).default} />
-            </div>
-          </div>
-          <div className='w-100 flex flex-column justify-center items-center'>
-            <div className='project-content flex flex-row w-100 mb4 mw8'>
-            
-              <div className='w-50'>
-                <p>
-                  Date: {project.date}
-                </p>
-                <p>
-                  Info: {project.info}
-                </p>
-                <p>
-                  Deliverables: {delivery}
-                </p>
-
-                <p>
-                  Links: {link}
-                </p>
-              </div>
-              
-              <div className='w-50'>
-                <p>
-                  {project.description}
-                </p>
-              </div>
-            </div>
-            <div className='flex flex-column'>
-              {images}
-            </div>
+  
+    <div className='page'>
+    {projectLoaded &&
+      <div className='project-container page w-100 ph4 pt3 pb4'>
+        <div className='project-title tr'>
+          <h1 className='pr5 f3'>{project.title}</h1>
+        </div>
+        <div className='w-100 flex items-center justify-center project-hero'>
+          <div className='w-100 mwImage'>
+            <img className='w-100 mv2' src={require(`../_projects${project.permalink}/${project.hero}`).default} />
           </div>
         </div>
+        <div className='w-100 flex flex-column justify-center items-center'>
+          <div className='project-content flex flex-row w-100 mb4 mw8'>
+          
+            <div className='w-50'>
+              <p>
+                <strong>Date:</strong> {project.date}
+              </p>
+              <p>
+              <strong>Info:</strong> {project.info}
+              </p>
+              <p>
+              <strong>Deliverables:</strong> {delivery}
+              </p>
+
+              <p>
+              <strong>Links:</strong> {link}
+              </p>
+            </div>
+            
+            <div className='w-50'>
+              <p>
+                {project.description}
+              </p>
+            </div>
+          </div>
+          <div className='flex flex-column'>
+            {images}
+          </div>
+        </div>
+      </div>
       }
-      </Fragment>
-      
+      </div>
     
   )
 }

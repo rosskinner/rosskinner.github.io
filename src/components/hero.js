@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { Vector3 } from 'three'
+import { Vector3, Scene } from 'three'
 // import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import defaultTexture from '../assets/images/test.png'
 import {Cloth, ClothFunction} from './cloth'
@@ -12,6 +12,7 @@ let mousePos = new Vector3(0,0,0)
 var MASS = 0.1
 var xSegs = 10
 var ySegs = 10
+var pointer
 
 var raycaster = new THREE.Raycaster()
 
@@ -24,12 +25,12 @@ var gravity = new Vector3( 0, -1, -1 ).multiplyScalar( MASS )
 var TIMESTEP = 18 / 1000
 var TIMESTEP_SQ = TIMESTEP * TIMESTEP
 
-var ballSize = 10; //40
-var ballPosition = new Vector3( 0, 0, 0 );
+var ballSize = 10
+var ballPosition = new Vector3( 0, 0, 0 )
 
-var diff = new Vector3();
-var windForce = new THREE.Vector3( 0, 0, 0 );
-var tmpForce = new THREE.Vector3();
+var diff = new Vector3()
+var windForce = new THREE.Vector3( 0, 0, 0 )
+var tmpForce = new THREE.Vector3()
 var selectProject
 
 function satisfyConstraints( p1, p2, distance ) {
@@ -55,7 +56,6 @@ function updateTexture (textureIndex) {
     object.material.map = projectTextures[textureIndex]
     object.customDepthMaterial.map = projectTextures[textureIndex]
   }
-  
 }
 
 function init(containerId, textures, select) {
@@ -95,8 +95,7 @@ function init(containerId, textures, select) {
     map: projectTextures[0],
     side: THREE.DoubleSide,
     transparent: true, 
-    alphaTest: 0.5,
-    flatshading:true
+    alphaTest: 0.5
   })
 
   // cloth geometry
@@ -116,6 +115,11 @@ function init(containerId, textures, select) {
     alphaTest: 0.5
   })
 
+  var pointerGeometry = new THREE.CircleBufferGeometry( 5, 32 )
+  var pointerMaterial = new THREE.MeshBasicMaterial( { color: 0x00000 } )
+  pointer = new THREE.Mesh( pointerGeometry, pointerMaterial )
+  pointer.position.set(0, 200,0)
+  scene.add(pointer)
   // renderer
 
   renderer = new THREE.WebGLRenderer( { antialias: true } )
@@ -219,13 +223,13 @@ function simulate( now ) {
 
   // Floor Constraints
 
-  for ( particles = cloth.particles, i = 0, il = particles.length; i < il; i ++ ) {
-    particle = particles[ i ]
-    var pos = particle.position
-    if ( pos.y < - 250 ) {
-      pos.y = - 250
-    }
-  }
+  // for ( particles = cloth.particles, i = 0, il = particles.length; i < il; i ++ ) {
+  //   particle = particles[ i ]
+  //   var pos = particle.position
+  //   if ( pos.y < - 250 ) {
+  //     pos.y = - 250
+  //   }
+  // }
 }
 
 function animate( now ) {
@@ -246,9 +250,9 @@ function render() {
   }
   
       
-  cloth.center.x = cloth.center.x/p.length
-  cloth.center.y = cloth.center.y/p.length
-  cloth.center.z = cloth.center.z/p.length
+  cloth.center.x = cloth.center.x/(p.length - 1)
+  cloth.center.y = cloth.center.y/(p.length - 1)
+  cloth.center.z = cloth.center.z/(p.length - 1)
 
   // console.log(cloth.center)
 
@@ -259,11 +263,25 @@ function render() {
   camera.lookAt(cloth.center)
 
   var intersects = raycaster.intersectObjects( scene.children )
+  
+
 	for ( var i = 0; i < intersects.length; i++ ) {
+    
     ballPosition.z = intersects[ i ].point.z
     ballPosition.y = intersects[ i ].point.y + (ballSize-1.5)
     ballPosition.x = intersects[ i ].point.x
-	}
+    pointer.position.copy(ballPosition)
+  }
+
+  if(intersects.length === 0) {
+    pointer.visible = false
+  } else {
+    if (pointer.position.y > 30) 
+    pointer.position.y = cloth.center.y
+    pointer.visible = true
+  }
+  pointer.lookAt(camera.position)
+  
   renderer.render( scene, camera )
 }
 

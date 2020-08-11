@@ -35,7 +35,7 @@ export default function ProjectsPage (props) {
     )
   })
   return (
-    <Fragment>
+    <div className='page'>
       <article className='w-100 flex flex-wrap pointer mb4 bb'>
         <div className='w-40'>
           <p>Project</p>
@@ -48,6 +48,6 @@ export default function ProjectsPage (props) {
         </div>
       </article>
       {projectList}
-    </Fragment>
+    </div>
   )
 }
