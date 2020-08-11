@@ -1,7 +1,7 @@
 {
-  "name": "portfolio-2019",
+  "name": "portfolio-2020",
   "version": "1.0.0",
-  "description": "Rosalind Skinner - Portfolio 2019",
+  "description": "Rosalind Skinner",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot --host 0.0.0.0",
     "build": "webpack --mode production"
