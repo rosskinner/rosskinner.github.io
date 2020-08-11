@@ -32,7 +32,7 @@ export default function ProjectPage (props) {
     setDelivery(d)
 
     data.images.forEach((item, key) => {
-      const src = require(`../_projects${data.permalink}/${item}.jpg`).default
+      const src = require(`../projects${data.permalink}/${item}.jpg`).default
       let padding = 'mb3'
       if (key === data.images.length -1) padding = ''
       i.push(<img className={`w-100 mt4 ${padding}`} key={key} src={src} />)
@@ -65,7 +65,7 @@ export default function ProjectPage (props) {
         </div>
         <div className='w-100 flex items-center justify-center project-hero'>
           <div className='w-100 mwImage'>
-            <img className='w-100 mv2' src={require(`../_projects${project.permalink}/${project.hero}`).default} />
+            <img className='w-100 mv2' src={require(`../projects${project.permalink}/${project.hero}`).default} />
           </div>
         </div>
         <div className='w-100 flex flex-column justify-center items-center'>

@@ -1,0 +1,14 @@
+
+{
+  "title": "Brickworks",
+  "info": "Installation/ Signage",
+  "hero": "1.jpg",
+  "description": "Some More Cool Shit",
+  "permalink": "/brickworks",
+  "images": [1,2],
+  "date": "2019",
+  "stack": ["javascript", "Electron", "Three JS"],
+  "delivery": ["Physical Prototype"],
+  "links": ["https://www.google.com"]
+}
+

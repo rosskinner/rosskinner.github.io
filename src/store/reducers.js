@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import projects from '../_projects'
+import projects from '../projects'
 
 
 const projectsMap = new Map()

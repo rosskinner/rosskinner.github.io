@@ -23,7 +23,7 @@ export default function HomePage (props) {
       let count = 0
       const t = []
       data.forEach((project, key) => {
-        const img = require(`../_projects${key}/texture.png`).default
+        const img = require(`../projects${key}/texture.png`).default
         t.push(img)
         const p = {...project, index: count, key: key, image: img}
         projectData.push(p)
