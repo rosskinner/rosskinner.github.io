@@ -16,7 +16,7 @@ module.exports = exports = (env, { mode = 'production' }) => {
     entry: './src/index',
     output: {
       path: path.join(__dirname, 'docs'),
-      publicPath: mode !== 'production' ? '/' : `/${name}/`
+      publicPath: mode !== 'production' ? '/' : `/`
     },
     module: {
       rules: [{

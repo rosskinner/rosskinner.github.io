@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import { Redirect } from 'react-router-dom'
 import { getHeroProjects } from '../store/selectors'
 import { store } from '../store'
@@ -8,10 +8,12 @@ export default function HomePage (props) {
   const [projects, setProjects] = useState([])
   const [heroProjects, setHeroProjects] = useState([])
   const [activeProject, setActiveProject] = useState(0)
-  // const [distance, setDistance] = useState(0)
+  const [loaded, setLoaded] = useState(false)
   const [textures, setTextures] = useState([])
   const [redirect, setRedirect] = useState(false)
+  const imageRef = useRef(null);
   let distance = 0
+  let imageLoaded = 0
   
   const fetchProjects = () => {
     console.log('fetchprojects')
@@ -19,25 +21,17 @@ export default function HomePage (props) {
     if (data !== projects) {
       const projectData = []
       let count = 0
-      
+      const t = []
       data.forEach((project, key) => {
-        const p = {...project, index: count, key: key}
+        const img = require(`../_projects${key}/texture.png`).default
+        t.push(img)
+        const p = {...project, index: count, key: key, image: img}
         projectData.push(p)
         count++
       })
-      setProjects(projectData)
-    }
-
-    if (data !== heroProjects) {
-      // console.log('heroProjects', heroProjects)
-      setHeroProjects(data)
-      const t = []
-      data.forEach((project, key) => {
-        t.push(require(`../_projects${key}/texture.png`).default)
-      })
+      
       setTextures(t)
-      Hero.init('hero-container', t, onClick)
-      Hero.animate(0)
+      setProjects(projectData)
     }
     
   }
@@ -61,6 +55,11 @@ export default function HomePage (props) {
     }   
   }
 
+  const onLoad = (e) => {
+    imageLoaded++
+    if (imageLoaded === projects.length - 1) setLoaded(true)
+  }
+
   useEffect(() => {
     window.addEventListener('mousemove', onMove)
     window.addEventListener('mouseenter', onEnter)
@@ -82,10 +81,25 @@ export default function HomePage (props) {
     }
   },[])
 
-  if (projects.length > 0) Hero.updateTexture(activeProject)
+
   if (redirect) return <Redirect to={`/projects${projects[activeProject].key}`}/>
+  if (loaded) {
+    console.log(textures)
+    Hero.init('hero-container', textures, onClick)
+    Hero.animate(0)
+    Hero.updateTexture(activeProject)
+  }
+    
   return (
     <div className='w-100 h-100 page' id='hero-container'>
+      {!loaded && 
+        <div className='loader' />
+      }
+      <div className='image-container'>
+        {projects.map((project, i) => {
+          return (<img ref={imageRef}  className='home-image' onLoad={onLoad} key={i} src={project.image} />)
+        })}
+      </div>
     </div>
   )
 }

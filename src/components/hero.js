@@ -12,7 +12,6 @@ let mousePos = new Vector3(0,0,0)
 var MASS = 0.1
 var xSegs = 10
 var ySegs = 10
-var pointer
 
 var raycaster = new THREE.Raycaster()
 
@@ -115,11 +114,6 @@ function init(containerId, textures, select) {
     alphaTest: 0.5
   })
 
-  var pointerGeometry = new THREE.CircleBufferGeometry( 5, 32 )
-  var pointerMaterial = new THREE.MeshBasicMaterial( { color: 0x00000 } )
-  pointer = new THREE.Mesh( pointerGeometry, pointerMaterial )
-  pointer.position.set(0, 200,0)
-  scene.add(pointer)
   // renderer
 
   renderer = new THREE.WebGLRenderer( { antialias: true } )
@@ -268,19 +262,9 @@ function render() {
 	for ( var i = 0; i < intersects.length; i++ ) {
     
     ballPosition.z = intersects[ i ].point.z
-    ballPosition.y = intersects[ i ].point.y + (ballSize-1.5)
+    ballPosition.y = intersects[ i ].point.y + (ballSize-2.5)
     ballPosition.x = intersects[ i ].point.x
-    pointer.position.copy(ballPosition)
   }
-
-  if(intersects.length === 0) {
-    pointer.visible = false
-  } else {
-    if (pointer.position.y > 30) 
-    pointer.position.y = cloth.center.y
-    pointer.visible = true
-  }
-  pointer.lookAt(camera.position)
   
   renderer.render( scene, camera )
 }

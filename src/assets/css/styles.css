@@ -17,6 +17,7 @@ canvas {
   right: 0px;
   top: 0px;
   z-index: -1;
+  cursor: url('../images/cursor.png') 25 25, pointer;
 }
 
 h1 {
@@ -75,6 +76,35 @@ p {
 .page-exit-active {
   opacity: 0;
   transition: opacity 400ms;
+}
+
+.loader {
+  width: 200px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.loader:before {
+  content: 'loadingloading';
+  position: relative;
+  font-size: 4rem;
+  top: -42px;
+  text-decoration-style: wavy;
+  text-decoration-color: black;
+  text-decoration-line: underline;
+  animation: animate .5s linear infinite;
+}
+
+.home-image {
+  display: none;
+}
+@keyframes animate {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: -30px;
+  }
 }
 
 
