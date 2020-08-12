@@ -91,6 +91,10 @@ p {
   opacity: 1;
 }
 
+.load-exit-done {
+  display: none;
+}
+
 .load-exit-active {
   opacity: 0;
   transition: opacity 400ms linear 800ms;
