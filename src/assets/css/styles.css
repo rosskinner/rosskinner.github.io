@@ -101,18 +101,24 @@ p {
 }
 
 .loader-container {
-  top: 2rem;
-  left: 1rem;
-  width: 100%;
-  height: calc(100vh - 2rem);
+  top: 3rem;
+  left: 2rem;
+  width: calc(100% - 2rem);
+  height: calc(100vh - 3rem);
   z-index: 100;
 }
 
 .home .loader-container {
   left: 0rem;
+  width: 100%;
+}
+
+.home .loader-container .loader {
+  margin-left: 0px;
 }
 
 .loader {
+  margin-left: -2rem;
   width: 200px;
   height: 100px;
   overflow: hidden;
@@ -123,9 +129,6 @@ p {
   content: 'loadingloadingloading';
   position: absolute;
   font-size: 2rem;
-  /* text-decoration-style: wavy;
-  text-decoration-color: black;
-  text-decoration-line: underline; */
   animation: animate 1s linear infinite;
   top: 20px;
   left: 0px;
