@@ -27,7 +27,7 @@ export default function ProjectPage (props) {
     data.links.forEach((item, key) => {
       let spacer = ','
       if (key === data.links.length - 1) spacer = ''
-      l.push(<Link className='link black' to={item} key={key}>{item}{spacer} </Link>)
+      l.push(<a className='link black' href={item} key={key}>{item}{spacer} </a>)
     })
     setLink(l)
 
@@ -62,7 +62,7 @@ export default function ProjectPage (props) {
     <div className='page'>
       <Loader loaded={loaded} />
     {projectLoaded &&
-      <div className='project-container page w-100 ph4 pt3 pb4'>
+      <div className='project-container page w-100 ph4 pb4'>
         <div className='project-title tr'>
           <h1 className='pr5 f3'>{project.title}</h1>
         </div>

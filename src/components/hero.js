@@ -131,19 +131,23 @@ function init(containerId, textures, select, imagesLoaded) {
   renderer.outputEncoding = THREE.sRGBEncoding
   renderer.shadowMapEnabled = false
   renderer.autoClear = false
-  renderer.domElement.addEventListener( 'mousemove', onMove, false )
-  renderer.domElement.addEventListener( 'touchmove', onMove, false )
-  renderer.domElement.addEventListener( 'click', onClick, false )
+  window.addEventListener( 'mousemove', onMove, false )
+  window.addEventListener( 'touchmove', onMove, false )
+  window.addEventListener( 'click', onClick, false )
 
 }
 function onClick () {
   var intersects = raycaster.intersectObjects( scene.children )
   if (intersects.length > 0) selectProject(true)
 }
-function onMove (e) {
-  const x = ( event.clientX / window.innerWidth ) * 2 - 1
-  const y =  - ( event.clientY / window.innerHeight ) * 2 + 1
+function onMove (event) {
+  // console.log(event.clientX)
+  let mouse = event
+  if (mouse.clientX === undefined) mouse = event.touches[0]
+  const x = ( mouse.clientX / window.innerWidth ) * 2 - 1
+  const y =  - ( mouse.clientY / window.innerHeight ) * 2 + 1
   const z = 0.5
+
   mousePos.set(x, y, z)
   raycaster.setFromCamera( mousePos, camera )
   
