@@ -123,7 +123,7 @@ p {
   top: 3rem;
   left: 0rem;
   width: 100%;
-  height: calc(100vh - 8rem);
+  height: calc(100vh - 10rem);
   z-index: 100;
 }
 
