@@ -43,7 +43,6 @@ export default function ProjectPage (props) {
   const onLoad = () => {
     // count++
     setloadedImages(loadedImages + 1)
-    console.log('loaded' ,loadedImages + 1, project.images.length + 1)
     if (loadedImages + 1 === project.images.length + 1) {
       setloaded(true)
     }

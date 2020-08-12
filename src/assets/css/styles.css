@@ -29,6 +29,10 @@ canvas {
   -moz-tap-highlight-color: transparent;
 }
 
+.nav, .footer {
+  z-index: 100
+}
+
 .home {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -123,8 +127,8 @@ p {
   top: 3rem;
   left: 0rem;
   width: 100%;
-  height: calc(100vh - 10rem);
-  z-index: 100;
+  height: calc(100vh - 15rem);
+  z-index: 1;
 }
 
 .loader {
