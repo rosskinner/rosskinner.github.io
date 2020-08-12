@@ -164,6 +164,10 @@ p {
   .project-link.f1-l {
     font-size: 5rem;
   }
+
+  .loader-container {
+    height: calc(100vh - 8rem);
+  }
 }
 
 
