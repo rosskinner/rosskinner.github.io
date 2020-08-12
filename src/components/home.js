@@ -7,14 +7,12 @@ import Loader from './loader'
 
 export default function HomePage (props) {
   const [projects, setProjects] = useState([])
-  const [heroProjects, setHeroProjects] = useState([])
   const [activeProject, setActiveProject] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const [textures, setTextures] = useState([])
   const [redirect, setRedirect] = useState(false)
-  const imageRef = useRef(null);
   let distance = 0
-  let imageLoaded = 0
+  let totalDistance = 200
   
   const fetchProjects = () => {
     console.log('fetchprojects')
@@ -47,7 +45,7 @@ export default function HomePage (props) {
   const onMove = () => {
     distance++
     
-    if (distance > 200) {
+    if (distance > totalDistance) {
       distance = 0
       const index = activeProject === projects.length - 1 ? 0 : activeProject + 1
       setActiveProject(index)
@@ -80,6 +78,7 @@ export default function HomePage (props) {
 
   useEffect(() => {
     fetchProjects()
+    if (window.innerWidth < 800) totalDistance = 100
 
     return () => {
       Hero.cancelAnimation()

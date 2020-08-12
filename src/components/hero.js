@@ -4,7 +4,7 @@ import { Vector3, Scene } from 'three'
 import defaultTexture from '../assets/images/test.png'
 import {Cloth, ClothFunction} from './cloth'
 
-
+let startTime = 0
 var loaded = false
 const CAMERA_HEIGHT = 400
 var mousePos = new Vector3(0,0,0)
@@ -59,6 +59,7 @@ function updateTexture (textureIndex) {
 }
 
 function init(containerId, textures, select, imagesLoaded) {
+  startTime = 0.0001 * Date.now()
   loaded = true
   container = document.getElementById(containerId)
   selectProject = select
@@ -162,19 +163,20 @@ function onWindowResize() {
 
 
 function simulate( now ) {
+  
   var i, il, particles, particle, constraints, constraint;
 
 
   particles = cloth.particles
 
-  if (now < 2000) {
+  if (now - startTime < 1) {
     var windStrength = Math.cos( now / 7000 );
 
-  windForce.set( Math.sin( now / 2000 ), Math.cos( now / 3000 ), Math.sin( now / 100 ) );
-  windForce.normalize();
-  windForce.multiplyScalar( windStrength );
+    windForce.set( Math.sin( now / 2000 ), Math.cos( now / 3000 ), Math.sin( now / 100 ) );
+    windForce.normalize();
+    windForce.multiplyScalar( windStrength );
 
-  var i, j, il, particles, particle, constraints, constraint
+    var i, j, il, particles, particle, constraints, constraint
 
   // Aerodynamics forces
 
@@ -241,9 +243,10 @@ function cancelAnimation () {
   cancelAnimationFrame(animFrame)
 }
 
-function animate( now ) {
+function animate( ) {
   animFrame = requestAnimationFrame( animate )
-  simulate( now )
+  const time = 0.0001 * Date.now()
+  simulate( time )
   render()
 }
 

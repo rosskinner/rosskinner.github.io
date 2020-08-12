@@ -10,7 +10,8 @@ export default function ProjectPage (props) {
   const [link, setLink] = useState([])
   const [delivery, setDelivery] = useState([])
   const [loaded, setloaded] = useState(false)
-  let count = 0
+  const [loadedImages, setloadedImages] = useState(0)
+  // let count = 0
 
   const setLists = (data) => {
     const s = []
@@ -39,9 +40,13 @@ export default function ProjectPage (props) {
     setDelivery(d)
   }
 
-  const onLoad = () =>{
-    count++
-    if (count === project.images.length + 1) setloaded(true)
+  const onLoad = () => {
+    // count++
+    setloadedImages(loadedImages + 1)
+    console.log('loaded' ,loadedImages + 1, project.images.length + 1)
+    if (loadedImages + 1 === project.images.length + 1) {
+      setloaded(true)
+    }
   }
 
   const fetchProject = () => {

@@ -19,6 +19,21 @@ canvas {
   top: 2rem;
   z-index: -1;
   cursor: url('../images/cursor.png') 25 25, pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.home {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 h1 {
@@ -104,7 +119,7 @@ p {
   top: 3rem;
   left: 0rem;
   width: 100%;
-  height: calc(100vh - 6rem);
+  height: calc(100vh - 8rem);
   z-index: 100;
 }
 
