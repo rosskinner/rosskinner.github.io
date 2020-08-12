@@ -2,10 +2,11 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  font-size: 1rem;
 }
 
-a {
-  outline: 0;
+a:focus {
+  outline: 0 !important;
 }
 
 .georgia {
@@ -26,11 +27,10 @@ h1 {
 
 p {
   font-weight: 400;
-  font-size: 1rem;
   word-wrap: break-word;
 }
 
-.project-hero {
+.project-hero, .projects-container {
   height: calc(100vh - 1rem);
   min-height: 600px;
 }
@@ -78,60 +78,76 @@ p {
   transition: opacity 400ms;
 }
 
+.load-enter {
+  opacity: 0;
+}
+
+.load-enter-active {
+  opacity: 1;
+  transition: opacity 400ms linear  800ms;
+}
+
+.load-exit {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.load-exit-active {
+  opacity: 0;
+  transition: opacity 400ms linear 800ms;
+}
+
+.loader-container {
+  top: 2rem;
+  left: 1rem;
+  width: 100%;
+  height: calc(100vh - 2rem);
+  z-index: 100;
+}
+
+.home .loader-container {
+  left: 0rem;
+}
+
 .loader {
   width: 200px;
-  height: 50px;
+  height: 100px;
   overflow: hidden;
+  position: relative;
 }
 
 .loader:before {
-  content: 'loadingloading';
-  position: relative;
-  font-size: 4rem;
-  top: -42px;
-  text-decoration-style: wavy;
+  content: 'loadingloadingloading';
+  position: absolute;
+  font-size: 2rem;
+  /* text-decoration-style: wavy;
   text-decoration-color: black;
-  text-decoration-line: underline;
-  animation: animate .5s linear infinite;
+  text-decoration-line: underline; */
+  animation: animate 1s linear infinite;
+  top: 20px;
+  left: 0px;
 }
 
 .home-image {
   display: none;
 }
+
 @keyframes animate {
   0% {
     left: 0px;
   }
   100% {
-    left: -30px;
+    left: -111px;
   }
 }
 
-
-/* .page-enter,
-.page-exit {
-  transition: opacity 1000ms ease-out;
+@media screen and (min-width: 60em) {
+  .project-link.f1-l {
+    font-size: 5rem;
+  }
 }
-
-.page-enter {
-  opacity: 1;
-}
-
-.page-enter.page-enter-active {
-  opacity: 0;
-}
-
-.page-exit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 1;
-}
-
-.page-exit-active {
-  opacity: 0;
-} */
-
 
 

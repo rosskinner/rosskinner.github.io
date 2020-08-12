@@ -15,28 +15,27 @@ export default function ProjectsPage (props) {
   useEffect(() => {
     fetchProjects()
   },[])
-  const gotProjects = projects.size > 0
-  const projectList = []
-  projects.forEach((project, key) => {
-    projectList.push(<article className='w-100 flex flex-wrap pointer project' key={key} alt={ project.title } title={ project.title } >
-        <div className='w-40'>
-          <p>{project.title}</p>
-        </div>
-        <div className='w-10'>
-          <p>{project.date}</p>
-        </div>
-        <div className='w-30'>
-          <p>{project.info}</p>
-        </div>
-        <div className='w-10'>
-          <Link to={`projects${project.permalink}`}>GO</Link>
-        </div>
-      </article>
-    )
-  })
+
   return (
-    <div className='page'>
-      <article className='w-100 flex flex-wrap pointer mb4 bb'>
+    <div className='page projects-container f3 ph4-l flex items-center justify-center'>
+      <div className='w-100'>
+        {Array.from(projects).map((pro, key) => {
+          const project = pro[1]
+
+          return(
+            <Link className='w-100 pointer project-link link black pointer f2 f1-l' to={`projects${project.permalink}`} key={key} alt={ project.title } title={ project.title } >
+              <p className='ma1'>{project.title}{key === projects.size - 1 ? '': ' '} </p>
+            </Link>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+{/* 
+
+  <article className='w-100 flex flex-wrap pointer mb4 bb'>
         <div className='w-40'>
           <p>Project</p>
         </div>
@@ -47,7 +46,16 @@ export default function ProjectsPage (props) {
           <p>Info</p>
         </div>
       </article>
-      {projectList}
-    </div>
-  )
-}
+
+  
+  <Link className='w-100 flex flex-wrap pointer project link black pointer' to={`projects${project.permalink}`} key={key} alt={ project.title } title={ project.title } >
+            <div className='w-40'>
+              <p>{project.title}</p>
+            </div>
+            <div className='w-10'>
+              <p>{project.date}</p>
+            </div>
+            <div className='w-30'>
+              <p>{project.info}</p>
+            </div>
+          </Link> */}

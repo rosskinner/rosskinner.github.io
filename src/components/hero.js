@@ -5,9 +5,9 @@ import defaultTexture from '../assets/images/test.png'
 import {Cloth, ClothFunction} from './cloth'
 
 
-let loaded = false
+var loaded = false
 const CAMERA_HEIGHT = 400
-let mousePos = new Vector3(0,0,0)
+var mousePos = new Vector3(0,0,0)
 
 var MASS = 0.1
 var xSegs = 10
@@ -31,6 +31,7 @@ var diff = new Vector3()
 var windForce = new THREE.Vector3( 0, 0, 0 )
 var tmpForce = new THREE.Vector3()
 var selectProject
+var animFrame
 
 function satisfyConstraints( p1, p2, distance ) {
 
@@ -57,7 +58,7 @@ function updateTexture (textureIndex) {
   }
 }
 
-function init(containerId, textures, select) {
+function init(containerId, textures, select, imagesLoaded) {
   loaded = true
   container = document.getElementById(containerId)
   selectProject = select
@@ -78,7 +79,10 @@ function init(containerId, textures, select) {
 
   // cloth material
   var loader = new THREE.TextureLoader()
-  for (let t = 0; t < textures.length; t++) {
+  loader.manager.onLoad = function ()  {
+    imagesLoaded()
+  }
+  for (var t = 0; t < textures.length; t++) {
     const tex = textures[t]
     
     var clothTexture = loader.load( tex )
@@ -88,6 +92,8 @@ function init(containerId, textures, select) {
     clothTexture.repeat.x = - 1
     projectTextures.push(clothTexture)
   }
+
+ 
   
 
   var clothMaterial = new THREE.MeshLambertMaterial({
@@ -118,7 +124,7 @@ function init(containerId, textures, select) {
 
   renderer = new THREE.WebGLRenderer( { antialias: true } )
   renderer.setPixelRatio( window.devicePixelRatio )
-  renderer.setSize( window.innerWidth, window.innerHeight )
+  renderer.setSize( window.innerWidth - 32, (window.innerHeight - 100) )
 
   container.appendChild( renderer.domElement )
 
@@ -126,6 +132,7 @@ function init(containerId, textures, select) {
   renderer.shadowMapEnabled = false
   renderer.autoClear = false
   renderer.domElement.addEventListener( 'mousemove', onMove, false )
+  renderer.domElement.addEventListener( 'touchmove', onMove, false )
   renderer.domElement.addEventListener( 'click', onClick, false )
 
 }
@@ -146,7 +153,7 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
 
-  renderer.setSize( window.innerWidth, window.innerHeight )
+  renderer.setSize( window.innerWidth - 32, window.innerHeight )
 }
 
 
@@ -226,9 +233,12 @@ function simulate( now ) {
   // }
 }
 
+function cancelAnimation () {
+  cancelAnimationFrame(animFrame)
+}
+
 function animate( now ) {
-  if (!loaded) return
-  requestAnimationFrame( animate )
+  animFrame = requestAnimationFrame( animate )
   simulate( now )
   render()
 }
@@ -280,5 +290,5 @@ export {
   updateTexture,
   onWindowResize,
   setLoaded,
-  loaded
+  cancelAnimation
 }

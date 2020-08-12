@@ -3,7 +3,7 @@ import './assets/css/styles.css'
 import React from 'react'
 import { render } from 'react-dom'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
@@ -16,19 +16,14 @@ import {
   TransitionGroup,
 } from 'react-transition-group'
 
-// const routes = [
-  // { path: '/', name: 'Home', Component: HomePage },
-  // { path: '/projects', name: 'Projects', Component: ProjectsPage },
-  // { path: '/projects/:id', name: 'Project', Component: ProjectPage },
-// ]
-
 const Application = (props) => {
   const { location } = props
+
   return (
     <Default>
       <TransitionGroup component={null}>
         <CSSTransition
-          key={location.key}
+          key={location.pathname}
           timeout={400}
           classNames='page'
           unmountOnExit
@@ -44,25 +39,6 @@ const Application = (props) => {
 
   )
 }
-
-
-{/* {routes.map(({ path, Component }) => (
-          <Route key={path} exact path={path}>
-          {(props) => (
-            
-            <CSSTransition
-              in={props.match != null}
-              timeout={400}
-              classNames='page'
-              unmountOnExit
-            >
-              <div className='page'>
-                <Component {...props} />
-              </div>
-            </CSSTransition>
-          )}
-        </Route>
-        ))} */}
 
 
 window.addEventListener('load', () => {

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { getHeroProjects } from '../store/selectors'
 import { store } from '../store'
 import * as Hero from './hero'
+import Loader from './loader'
 
 export default function HomePage (props) {
   const [projects, setProjects] = useState([])
@@ -32,21 +33,19 @@ export default function HomePage (props) {
       
       setTextures(t)
       setProjects(projectData)
+      loadHero(t)
     }
     
   }
 
   const onClick  = useCallback(e => {
     setRedirect(true)
-    // props.history.push(`/projects${projects[activeProject].key}`)
   })
   const onEnter = () => {
     setDistance(0)
   }
   const onMove = () => {
     distance++
-    
-    // setDistance(distance + 1)
     
     if (distance > 200) {
       distance = 0
@@ -56,17 +55,23 @@ export default function HomePage (props) {
   }
 
   const onLoad = (e) => {
-    imageLoaded++
-    if (imageLoaded === projects.length - 1) setLoaded(true)
+    setLoaded(true)
+  }
+  const loadHero = (t) => {
+    Hero.init('hero-container', t, onClick, onLoad)
+    Hero.animate(0)
   }
 
   useEffect(() => {
+    if (loaded) Hero.updateTexture(activeProject)
     window.addEventListener('mousemove', onMove)
+    window.addEventListener('touchmove', onMove)
     window.addEventListener('mouseenter', onEnter)
     window.addEventListener( 'resize', Hero.onWindowResize )
     
     return () => {
       window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('touchmove', onMove)
       window.removeEventListener('mouseenter', onEnter)
       window.removeEventListener( 'resize', Hero.onWindowResize)
     }
@@ -77,29 +82,16 @@ export default function HomePage (props) {
     fetchProjects()
 
     return () => {
-      Hero.setLoaded(false)
+      Hero.cancelAnimation()
     }
   },[])
 
 
   if (redirect) return <Redirect to={`/projects${projects[activeProject].key}`}/>
-  if (loaded) {
-    console.log(textures)
-    Hero.init('hero-container', textures, onClick)
-    Hero.animate(0)
-    Hero.updateTexture(activeProject)
-  }
-    
-  return (
-    <div className='w-100 h-100 page' id='hero-container'>
-      {!loaded && 
-        <div className='loader' />
-      }
-      <div className='image-container'>
-        {projects.map((project, i) => {
-          return (<img ref={imageRef}  className='home-image' onLoad={onLoad} key={i} src={project.image} />)
-        })}
+    return (
+      <div className='w-100 h-100 page home' id='hero-container'>
+        <Loader loaded={loaded}/>
       </div>
-    </div>
-  )
+    )
+  
 }
