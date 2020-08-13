@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 export default function Default (props) {
   return (
-    <main className='flex flex-column relative ma3' aria-label='Content'>
+    <main className='flex flex-column relative ma3-l' aria-label='Content'>
       <div className='nav flex flex-row justify-between mb4 fixed top-0 left-0 w-100 pa3 bg-white'>
         <div className='w-70 mt2'>
           <div className='title'>

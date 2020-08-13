@@ -130,7 +130,8 @@ function init(containerId, textures, select, imagesLoaded) {
   container.appendChild( renderer.domElement )
 
   renderer.outputEncoding = THREE.sRGBEncoding
-  renderer.shadowMapEnabled = false
+  // renderer.shadowMapEnabled = false
+  renderer.shadowMap.enabled = false
   renderer.autoClear = false
   window.addEventListener( 'mousemove', onMove, false )
   window.addEventListener( 'touchmove', onMove, false )

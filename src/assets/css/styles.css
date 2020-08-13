@@ -74,7 +74,7 @@ p {
   transform: rotate(-90deg) translateZ(0);
   transform-origin: left center;
   width: 800px;
-  left: 1.5rem;
+  left: 1rem;
   position: absolute;
   top: 805px;
 }
@@ -167,6 +167,10 @@ p {
 
   .loader-container {
     height: calc(100vh - 8rem);
+  }
+
+  .project-title h1 {
+    left: 1.5rem;
   }
 }
 

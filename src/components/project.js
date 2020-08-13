@@ -66,9 +66,9 @@ export default function ProjectPage (props) {
     <div className='page'>
       <Loader loaded={loaded} />
     {projectLoaded &&
-      <div className='project-container page w-100 ph4 pb4'>
+      <div className='project-container page w-100 ph0 ph4-l pb4'>
         <div className='project-title tr'>
-          <h1 className='pr5 f3'>{project.title}</h1>
+          <h1 className='pr5 f4 f3-l'>{project.title}</h1>
         </div>
         <div className='w-100 flex items-center justify-center project-hero'>
           <div className='w-100 mwImage'>
@@ -76,7 +76,7 @@ export default function ProjectPage (props) {
           </div>
         </div>
         <div className='w-100 flex flex-column justify-center items-center'>
-          <div className='project-content flex flex-column flex-row-l w-100 mt5 mb3 f3'>
+          <div className='project-content flex flex-column flex-row-l w-100-l mh4 mh0-l mt5 mb3 f4 f3-l'>
           
             <div className='w-100 w-40-l mt3 mt0-l pr2-l'>
               <p>
@@ -97,16 +97,16 @@ export default function ProjectPage (props) {
             </div>
             
             <div className='w-100 w-60-l'>
-              <p className='f3'>
+              <p className='f4 f3-l'>
                 {project.description}
               </p>
             </div>
           </div>
           <div className='flex flex-column w-100'>
             {project.images.map((image, key) => {
-               let padding = 'mb3'
+               let padding = 'mb0 mb3-l'
                if (key === project.images.length -1) padding = ''
-               return <img className={`w-100 mt4 ${padding}`} onLoad={onLoad} key={key} src={require(`../projects${project.permalink}/${image}.jpg`).default} />
+               return <img className={`w-100 mt0 mt4-l ${padding}`} onLoad={onLoad} key={key} src={require(`../projects${project.permalink}/${image}.jpg`).default} />
             })}
           </div>
         </div>
