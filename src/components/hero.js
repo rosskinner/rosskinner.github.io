@@ -6,7 +6,7 @@ import {Cloth, ClothFunction} from './cloth'
 
 let startTime = 0
 var loaded = false
-const CAMERA_HEIGHT = 400
+let cameraHeight = 400
 var mousePos = new Vector3(0,0,0)
 
 var MASS = 0.1
@@ -71,8 +71,9 @@ function init(containerId, textures, select, imagesLoaded) {
 
   // camera
 
-  camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 )
-  camera.position.set( 0, CAMERA_HEIGHT, 50 )
+  camera = new THREE.PerspectiveCamera( 30, (window.innerWidth-32) / window.innerHeight, 1, 1000 )
+  if (window.innerWidth < 800) cameraHeight = 500
+  camera.position.set( 0, cameraHeight, 50 )
   
   // lights
 
@@ -156,7 +157,7 @@ function onMove (event) {
 }
 function onWindowResize() {
 
-  camera.aspect = window.innerWidth / window.innerHeight
+  camera.aspect = (window.innerWidth - 32) / window.innerHeight
   camera.updateProjectionMatrix()
 
   renderer.setSize( window.innerWidth - 32, window.innerHeight )
@@ -271,7 +272,7 @@ function render() {
   clothGeometry.attributes.position.needsUpdate = true
   clothGeometry.computeVertexNormals()
   
-  camera.position.y = cloth.center.y + CAMERA_HEIGHT
+  camera.position.y = cloth.center.y + cameraHeight
   camera.lookAt(cloth.center)
 
   var intersects = raycaster.intersectObjects( scene.children )

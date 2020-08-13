@@ -15,7 +15,7 @@ a:focus {
 
 canvas {
   position: absolute;
-  right: 0px;
+  left: 16px;
   top: 2rem;
   z-index: -1;
   cursor: url('../images/cursor.png') 25 25, pointer;
