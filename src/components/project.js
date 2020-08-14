@@ -71,7 +71,7 @@ export default function ProjectPage (props) {
           <h1 className='pr5 f4 f3-l'>{project.title}</h1>
         </div>
         <div className='w-100 flex items-center justify-center project-hero'>
-          <div className='w-100 mwImage'>
+          <div className='w-100 mwImage mh4 mh0-l'>
             <img className='w-100 mv2' onLoad={onLoad} src={require(`../projects${project.permalink}/${project.hero}`).default} />
           </div>
         </div>
