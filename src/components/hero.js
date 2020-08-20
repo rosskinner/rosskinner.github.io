@@ -3,6 +3,8 @@ import { Vector3, Scene } from 'three'
 // import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import defaultTexture from '../assets/images/test.png'
 import {Cloth, ClothFunction} from './cloth'
+// import Copy from './copy'
+const root = document.documentElement
 
 let startTime = 0
 var loaded = false
@@ -32,6 +34,7 @@ var windForce = new THREE.Vector3( 0, 0, 0 )
 var tmpForce = new THREE.Vector3()
 var selectProject
 var animFrame
+// var copyCanvas
 
 function satisfyConstraints( p1, p2, distance ) {
 
@@ -52,9 +55,12 @@ var object
 var projectTextures = []
 
 function updateTexture (textureIndex) {
+  // renderer.render( scene, camera )
+  // copyCanvas.update(renderer.domElement)
   if (object.material.map !== projectTextures[textureIndex]) {
     object.material.map = projectTextures[textureIndex]
     object.customDepthMaterial.map = projectTextures[textureIndex]
+    // console.log('update', renderer)
   }
 }
 
@@ -67,7 +73,7 @@ function init(containerId, textures, select, imagesLoaded) {
   // scene
 
   scene = new THREE.Scene()
-  scene.background = new THREE.Color( 0xffffff )
+  // scene.background = new THREE.Color( 0xffffff )
 
   // camera
 
@@ -124,16 +130,19 @@ function init(containerId, textures, select, imagesLoaded) {
 
   // renderer
 
-  renderer = new THREE.WebGLRenderer( { antialias: true } )
+  renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } )
   renderer.setPixelRatio( window.devicePixelRatio )
   renderer.setSize( window.innerWidth - 32, (window.innerHeight - 100) )
+  renderer.setClearColor( 0x000000, 0 )
 
   container.appendChild( renderer.domElement )
 
   renderer.outputEncoding = THREE.sRGBEncoding
   // renderer.shadowMapEnabled = false
   renderer.shadowMap.enabled = false
-  renderer.autoClear = false
+
+  // copyCanvas = new Copy(container, renderer)
+  // renderer.autoClear = false
   window.addEventListener( 'mousemove', onMove, false )
   window.addEventListener( 'touchmove', onMove, false )
   window.addEventListener( 'click', onClick, false )
@@ -153,14 +162,34 @@ function onMove (event) {
 
   mousePos.set(x, y, z)
   raycaster.setFromCamera( mousePos, camera )
+  var intersects = raycaster.intersectObjects( scene.children )
+
+  for ( var i = 0; i < intersects.length; i++ ) {
+    
+    ballPosition.z = intersects[ i ].point.z
+    ballPosition.y = intersects[ i ].point.y + (ballSize-2.5)
+    ballPosition.x = intersects[ i ].point.x
+  }
+  root.style.setProperty(
+    "--cursor-scale",
+    mouse.target instanceof HTMLAnchorElement ||
+      mouse.target instanceof HTMLImageElement ||
+      (mouse.target.dataset && mouse.target.dataset.cursorExpand) ||
+        intersects.length > 0
+      ? 2
+      : 1
+  );
+//   clientX
+  root.style.setProperty("--mouse-x", `${mouse.clientX - 20}px`)
+  root.style.setProperty("--mouse-y", `${mouse.clientY - 20}px`)
   
 }
 function onWindowResize() {
 
-  camera.aspect = (window.innerWidth - 32) / window.innerHeight
+  camera.aspect = (window.innerWidth - 32) / (window.innerHeight - 100)
   camera.updateProjectionMatrix()
 
-  renderer.setSize( window.innerWidth - 32, window.innerHeight )
+  renderer.setSize( window.innerWidth - 32,  (window.innerHeight - 100) )
 }
 
 
@@ -273,17 +302,15 @@ function render() {
   clothGeometry.computeVertexNormals()
   
   camera.position.y = cloth.center.y + cameraHeight
+  camera.position.x = cloth.center.x
+  // camera.position.z = cloth.center.z * -1
+  // console.log(cloth.center.z)
   camera.lookAt(cloth.center)
 
-  var intersects = raycaster.intersectObjects( scene.children )
+  // var intersects = raycaster.intersectObjects( scene.children )
   
 
-	for ( var i = 0; i < intersects.length; i++ ) {
-    
-    ballPosition.z = intersects[ i ].point.z
-    ballPosition.y = intersects[ i ].point.y + (ballSize-2.5)
-    ballPosition.x = intersects[ i ].point.x
-  }
+	
   
   renderer.render( scene, camera )
 }

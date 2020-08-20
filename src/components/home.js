@@ -42,14 +42,14 @@ export default function HomePage (props) {
   const onEnter = () => {
     setDistance(0)
   }
-  const onMove = () => {
+  const onMove = (e) => {
     distance++
     
     if (distance > totalDistance) {
       distance = 0
       const index = activeProject === projects.length - 1 ? 0 : activeProject + 1
       setActiveProject(index)
-    }   
+    }
   }
 
   const onLoad = (e) => {
@@ -62,14 +62,14 @@ export default function HomePage (props) {
 
   useEffect(() => {
     if (loaded) Hero.updateTexture(activeProject)
-    window.addEventListener('mousemove', onMove)
-    window.addEventListener('touchmove', onMove)
+    // window.addEventListener('mousemove', onMove)
+    // window.addEventListener('touchmove', onMove)
     window.addEventListener('mouseenter', onEnter)
     window.addEventListener( 'resize', Hero.onWindowResize )
     
     return () => {
-      window.removeEventListener('mousemove', onMove)
-      window.removeEventListener('touchmove', onMove)
+      // window.removeEventListener('mousemove', onMove)
+      // window.removeEventListener('touchmove', onMove)
       window.removeEventListener('mouseenter', onEnter)
       window.removeEventListener( 'resize', Hero.onWindowResize)
     }
@@ -89,6 +89,11 @@ export default function HomePage (props) {
   if (redirect) return <Redirect to={`/projects${projects[activeProject].key}`}/>
     return (
       <div className='w-100 h-100 page home' id='hero-container'>
+        <div className='projects-container f3 ph3 ph4-l flex justify-center georgia intro'>
+          <div className='w-100 project-link link black f2 f1-l mt6'>
+            {/* <p className='ma1'>Maker. Creative. <br/>Coder.</p> */}
+          </div>
+        </div>
         <Loader loaded={loaded}/>
       </div>
     )

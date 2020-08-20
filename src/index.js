@@ -1,3 +1,5 @@
+
+import './containers/global'
 import 'tachyons'
 import './assets/css/styles.css'
 import React from 'react'
@@ -15,6 +17,8 @@ import {
   CSSTransition,
   TransitionGroup,
 } from 'react-transition-group'
+
+
 
 const Application = (props) => {
   const { location } = props
@@ -51,3 +55,5 @@ window.addEventListener('load', () => {
     application
   )
 })
+
+

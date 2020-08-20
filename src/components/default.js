@@ -12,7 +12,7 @@ export default function Default (props) {
             </Link>
           </div>
         </div>
-        <Link to={'/projects'} className='link black fr mt2'>Index</Link>
+        <Link to={'/projects'} className='link black fr mt2'>Projects</Link>
       </div>
       
       {props.children}
