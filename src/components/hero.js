@@ -132,7 +132,7 @@ function init(containerId, textures, select, imagesLoaded) {
 
   renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } )
   renderer.setPixelRatio( window.devicePixelRatio )
-  renderer.setSize( window.innerWidth - 32, (window.innerHeight - 100) )
+  renderer.setSize( window.innerWidth, window.innerHeight )
   renderer.setClearColor( 0x000000, 0 )
 
   container.appendChild( renderer.domElement )
@@ -146,6 +146,7 @@ function init(containerId, textures, select, imagesLoaded) {
   window.addEventListener( 'mousemove', onMove, false )
   window.addEventListener( 'touchmove', onMove, false )
   window.addEventListener( 'click', onClick, false )
+  window.addEventListener( 'resize', onWindowResize, false )
 
 }
 function onClick () {
@@ -165,31 +166,23 @@ function onMove (event) {
   var intersects = raycaster.intersectObjects( scene.children )
 
   for ( var i = 0; i < intersects.length; i++ ) {
-    
     ballPosition.z = intersects[ i ].point.z
     ballPosition.y = intersects[ i ].point.y + (ballSize-2.5)
     ballPosition.x = intersects[ i ].point.x
   }
+
   root.style.setProperty(
     "--cursor-scale",
-    mouse.target instanceof HTMLAnchorElement ||
-      mouse.target instanceof HTMLImageElement ||
-      (mouse.target.dataset && mouse.target.dataset.cursorExpand) ||
-        intersects.length > 0
-      ? 2
-      : 1
-  );
-//   clientX
-  root.style.setProperty("--mouse-x", `${mouse.clientX - 20}px`)
-  root.style.setProperty("--mouse-y", `${mouse.clientY - 20}px`)
+      intersects.length > 0 ? 2 : 1
+  )
   
 }
 function onWindowResize() {
 
-  camera.aspect = (window.innerWidth - 32) / (window.innerHeight - 100)
+  camera.aspect = (window.innerWidth) / (window.innerHeight)
   camera.updateProjectionMatrix()
 
-  renderer.setSize( window.innerWidth - 32,  (window.innerHeight - 100) )
+  renderer.setSize( window.innerWidth,  (window.innerHeight) )
 }
 
 
@@ -319,6 +312,12 @@ function setLoaded(load) {
   loaded = load
 }
 
+function removeListeners () {
+  window.removeEventListener('mousemove', onMove)
+  window.removeEventListener('touchmove', onMove)
+  window.removeEventListener('click', onClick)
+  window.removeEventListener('resize', onWindowResize )
+}
 
 export {
   init,
@@ -326,5 +325,6 @@ export {
   updateTexture,
   onWindowResize,
   setLoaded,
-  cancelAnimation
+  cancelAnimation,
+  removeListeners
 }

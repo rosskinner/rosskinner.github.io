@@ -62,16 +62,14 @@ export default function HomePage (props) {
 
   useEffect(() => {
     if (loaded) Hero.updateTexture(activeProject)
-    // window.addEventListener('mousemove', onMove)
-    // window.addEventListener('touchmove', onMove)
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('touchmove', onMove)
     window.addEventListener('mouseenter', onEnter)
-    window.addEventListener( 'resize', Hero.onWindowResize )
     
     return () => {
-      // window.removeEventListener('mousemove', onMove)
-      // window.removeEventListener('touchmove', onMove)
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('touchmove', onMove)
       window.removeEventListener('mouseenter', onEnter)
-      window.removeEventListener( 'resize', Hero.onWindowResize)
     }
     
   },[activeProject])
@@ -82,13 +80,14 @@ export default function HomePage (props) {
 
     return () => {
       Hero.cancelAnimation()
+      Hero.removeListeners()
     }
   },[])
 
 
   if (redirect) return <Redirect to={`/projects${projects[activeProject].key}`}/>
     return (
-      <div className='w-100 h-100 page home' id='hero-container'>
+      <div className='w-100 h-100 page home bg-white' id='hero-container'>
         <div className='projects-container f3 ph3 ph4-l flex justify-center georgia intro'>
           <div className='w-100 project-link link black f2 f1-l mt6'>
             {/* <p className='ma1'>Maker. Creative. <br/>Coder.</p> */}

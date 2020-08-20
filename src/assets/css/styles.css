@@ -8,6 +8,7 @@
 body {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
+  background-color: #FFFFFF;
 }
 
 a:focus {
@@ -28,7 +29,7 @@ a:focus {
   scale(var(--cursor-scale));
   transform: translate3d(var(--mouse-x), var(--mouse-y), 0)
     scale(var(--cursor-scale));
-  background: #19A974;
+  background: #bd5189;
   border-radius: 50%;
   width: 3em;
   height: 3em;
@@ -40,8 +41,8 @@ a:focus {
 
 canvas {
   position: absolute;
-  left: 16px;
-  top: 2rem;
+  left: 0px;
+  top: 0rem;
   z-index: 0;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -51,12 +52,15 @@ canvas {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   -moz-tap-highlight-color: transparent;
+  background-color: #FFFFFF;
 }
 
 .nav, .footer {
   z-index: 100
 }
-
+#app {
+  background-color: #FFFFFF;
+}
 .home {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -81,11 +85,8 @@ canvas {
   color: #19A974;
   transition: color 0.3s ease-in-out;
 }
-
-.intro {
-  /* pointer-events: none; */
-  /* cursor: url('../images/cursor.png') 16 16, pointer; */
-  z-index: -2;
+.project-link {
+  width: max-content;
 }
 
 h1 {
@@ -98,7 +99,7 @@ p {
 }
 
 .project-hero, .projects-container {
-  height: calc(100vh - 5rem);
+  height: calc(100vh - 4rem);
   min-height: 600px;
 }
 
@@ -237,9 +238,9 @@ p {
     background-size: contain;
   }
 
-  canvas {
+  /* canvas {
     left: 0px;
-  }
+  } */
   .project-link.f1-l {
     font-size: 5rem;
   }
