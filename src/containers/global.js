@@ -13,4 +13,4 @@ const setFromEvent = ({ clientX, clientY, target }) => {
   root.style.setProperty("--mouse-x", `${clientX - 30}px`)
   root.style.setProperty("--mouse-y", `${clientY - 30}px`)
 };
-document.addEventListener('mousemove', setFromEvent, false)
+window.addEventListener('mousemove', setFromEvent, false)
