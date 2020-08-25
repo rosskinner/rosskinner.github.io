@@ -207,13 +207,15 @@ function simulate( now ) {
 
 
   particles = cloth.particles
+  var windStrength = Math.cos( now / 7000 )
+  
+  if (now - startTime > 1) {
+    windStrength = Math.cos( now / 9000 )
+  }
 
-  if (now - startTime < 1) {
-    var windStrength = Math.cos( now / 7000 );
-
-    windForce.set( Math.sin( now / 2000 ), Math.cos( now / 3000 ), Math.sin( now / 100 ) );
-    windForce.normalize();
-    windForce.multiplyScalar( windStrength );
+    windForce.set( Math.sin( now / 2000 ), Math.cos( now / 3000 ), Math.sin( now / 1000 ) )
+    windForce.normalize()
+    windForce.multiplyScalar( windStrength )
 
     var i, j, il, particles, particle, constraints, constraint
 
@@ -233,7 +235,7 @@ function simulate( now ) {
         particles[ indx ].addForce( tmpForce )
       }
     }
-  }
+
   
 
 
