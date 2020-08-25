@@ -209,35 +209,28 @@ function simulate( now ) {
   particles = cloth.particles
   var windStrength = Math.cos( now / 7000 )
   
-  if (now - startTime > 1) {
-    windStrength = Math.cos( now / 9000 )
-  }
+  windForce.set( Math.sin( now / Math.random() * 2000 ), Math.cos( now / Math.random() * 3000 ), Math.sin( now / Math.random() * 100 ) )
+  windForce.normalize()
+  windForce.multiplyScalar( windStrength )
 
-    windForce.set( Math.sin( now / 2000 ), Math.cos( now / 3000 ), Math.sin( now / 1000 ) )
-    windForce.normalize()
-    windForce.multiplyScalar( windStrength )
+  var i, j, il, particles, particle, constraints, constraint
 
-    var i, j, il, particles, particle, constraints, constraint
-
-  // Aerodynamics forces
+// Aerodynamics forces
 
 
-    var indx
-    var normal = new THREE.Vector3()
-    var indices = clothGeometry.index
-    var normals = clothGeometry.attributes.normal
+  var indx
+  var normal = new THREE.Vector3()
+  var indices = clothGeometry.index
+  var normals = clothGeometry.attributes.normal
 
-    for ( i = 0, il = indices.count; i < il; i += 3 ) {
-      for ( j = 0; j < 3; j ++ ) {
-        indx = indices.getX( i + j )
-        normal.fromBufferAttribute( normals, indx )
-        tmpForce.copy( normal ).normalize().multiplyScalar( normal.dot( windForce ) )
-        particles[ indx ].addForce( tmpForce )
-      }
+  for ( i = 0, il = indices.count; i < il; i += 3 ) {
+    for ( j = 0; j < 3; j ++ ) {
+      indx = indices.getX( i + j )
+      normal.fromBufferAttribute( normals, indx )
+      tmpForce.copy( normal ).normalize().multiplyScalar( normal.dot( windForce ) )
+      particles[ indx ].addForce( tmpForce )
     }
-
-  
-
+  }
 
   for ( particles = cloth.particles, i = 0, il = particles.length; i < il; i ++ ) {
 
@@ -284,10 +277,10 @@ function cancelAnimation () {
   cancelAnimationFrame(animFrame)
 }
 
-function animate( ) {
+function animate(now) {
   animFrame = requestAnimationFrame( animate )
-  const time = 0.0001 * Date.now()
-  simulate( time )
+  // const time = 0.0001 * Date.now()
+  simulate(now)
   render()
   camera.updateProjectionMatrix()
 }

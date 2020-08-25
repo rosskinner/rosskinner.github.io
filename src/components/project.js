@@ -68,7 +68,7 @@ export default function ProjectPage (props) {
     {projectLoaded &&
       <div className='project-container page w-100 ph0 ph4-l pb4'>
         <div className='project-title tr'>
-          <h1 className='pr5 f4 f3-l'>{project.title}</h1>
+          <h1 className='pr5 f4 f3-l georgia'>{project.title}</h1>
         </div>
         <div className='w-100 flex items-center justify-center project-hero'>
           <div className='w-100 mwImage mh4 mh0-l'>

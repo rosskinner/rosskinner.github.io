@@ -17,7 +17,7 @@ export default function ProjectsPage (props) {
   },[])
 
   return (
-    <div className='page projects-container f3 ph4-l flex items-center justify-center'>
+    <div className='page projects-container f3 ph3 flex items-center justify-center'>
       <div className='w-100 project-link-container'>
         {Array.from(projects).map((pro, key) => {
           const project = pro[1]

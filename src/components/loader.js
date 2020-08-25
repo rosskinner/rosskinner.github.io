@@ -10,7 +10,7 @@ export default function Loader (props) {
     unmountOnExit
   >
     <div className='fixed loader-container flex flex-column items-center justify-center bg-white' >
-      <div className='loader' />
+      <div className='loader georgia' />
     </div>
   </CSSTransition>
   )
