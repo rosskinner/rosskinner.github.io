@@ -5,6 +5,8 @@ import { store } from '../store'
 import * as Hero from './hero'
 import Loader from './loader'
 
+// import './gyro'
+
 export default function HomePage (props) {
   const [projects, setProjects] = useState([])
   const [activeProject, setActiveProject] = useState(0)
@@ -15,7 +17,6 @@ export default function HomePage (props) {
   let totalDistance = 200
   
   const fetchProjects = () => {
-    console.log('fetchprojects')
     const data = getHeroProjects(store.getState())
     if (data !== projects) {
       const projectData = []
@@ -23,7 +24,8 @@ export default function HomePage (props) {
       const t = []
       data.forEach((project, key) => {
         const img = require(`../projects${key}/texture.png`).default
-        t.push(img)
+        const mobile = require(`../projects${key}/texture-m.png`).default
+        t.push({default: img, mobile:mobile})
         const p = {...project, index: count, key: key, image: img}
         projectData.push(p)
         count++
@@ -77,22 +79,20 @@ export default function HomePage (props) {
   useEffect(() => {
     fetchProjects()
     if (window.innerWidth < 800) totalDistance = 100
+    const body = document.getElementsByTagName('body')[0]
+    body.classList.add('hidden')
 
     return () => {
+      body.classList.remove('hidden')
       Hero.cancelAnimation()
       Hero.removeListeners()
     }
   },[])
 
-
   if (redirect) return <Redirect to={`/projects${projects[activeProject].key}`}/>
+  
     return (
       <div className='w-100 h-100 page home bg-white' id='hero-container'>
-        <div className='projects-container f3 ph3 ph4-l flex justify-center georgia intro'>
-          <div className='w-100 project-link link black f2 f1-l mt6'>
-            {/* <p className='ma1'>Maker. Creative. <br/>Coder.</p> */}
-          </div>
-        </div>
         <Loader loaded={loaded}/>
       </div>
     )

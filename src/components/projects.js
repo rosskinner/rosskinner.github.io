@@ -23,7 +23,7 @@ export default function ProjectsPage (props) {
           const project = pro[1]
 
           return(
-            <Link className='pointer link black pointer ma1 project-link f2 f1-l georgia db' to={`projects${project.permalink}`} key={key} alt={ project.title } title={ project.title } >
+            <Link className='w-100 pointer link black pointer ma1 project-link f2 f1-l georgia db' to={`projects${project.permalink}`} key={key} alt={ project.title } title={ project.title } >
               {project.title}{key === projects.size - 1 ? '': ' '}
             </Link>
           )

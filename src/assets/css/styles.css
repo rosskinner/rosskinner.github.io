@@ -11,6 +11,10 @@ body {
   background-color: #FFFFFF;
 }
 
+.hidden {
+  overflow-y: hidden;
+}
+
 a:focus {
   outline: 0 !important;
 }
@@ -20,6 +24,7 @@ a:focus {
 }
 
 .circle {
+  display: none;
   pointer-events: none;
   position: fixed;
   z-index: 200;
@@ -61,6 +66,7 @@ canvas {
 #app {
   background-color: #FFFFFF;
 }
+
 .home {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -85,9 +91,6 @@ canvas {
   color: #19A974;
   transition: color 0.3s ease-in-out;
 }
-.project-link {
-  width: max-content;
-}
 
 h1 {
   font-weight: 400;
@@ -104,7 +107,7 @@ p {
 }
 
 .mwImage {
-  max-width: 38rem;
+  max-width: 52rem;
 }
 
 .project-title {
@@ -172,7 +175,7 @@ p {
   top: 3rem;
   left: 0rem;
   width: 100%;
-  height: calc(100vh - 15rem);
+  height: calc(100vh - 10rem);
   z-index: 1;
 }
 
@@ -233,16 +236,24 @@ p {
 }
 
 @media screen and (min-width: 60em) {
+  canvas {
+    left: -1rem;
+    top: -1rem;
+  }
 
   .home {
     background-size: contain;
   }
+  .circle {
+    display: block;
+  }
 
-  /* canvas {
-    left: 0px;
-  } */
   .project-link.f1-l {
     font-size: 5rem;
+  }
+
+  .project-link {
+    max-width: max-content;
   }
 
   .loader-container {

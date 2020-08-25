@@ -1,14 +1,14 @@
 import * as THREE from 'three'
 import { Vector3, Scene } from 'three'
 // import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
-import defaultTexture from '../assets/images/test.png'
+// import { DeviceOrientationControls } from 'three/examples/jsm/controls/DeviceOrientationControls'
 import {Cloth, ClothFunction} from './cloth'
 // import Copy from './copy'
 const root = document.documentElement
 
 let startTime = 0
 var loaded = false
-let cameraHeight = 400
+let cameraHeight = 300
 var mousePos = new Vector3(0,0,0)
 
 var MASS = 0.1
@@ -34,6 +34,7 @@ var windForce = new THREE.Vector3( 0, 0, 0 )
 var tmpForce = new THREE.Vector3()
 var selectProject
 var animFrame
+var fixedCameraRotation 
 // var copyCanvas
 
 function satisfyConstraints( p1, p2, distance ) {
@@ -53,15 +54,29 @@ var camera, scene, renderer
 var clothGeometry
 var object
 var projectTextures = []
+var loader
+var key = 'default'
+// var controls
 
 function updateTexture (textureIndex) {
   // renderer.render( scene, camera )
   // copyCanvas.update(renderer.domElement)
   if (object.material.map !== projectTextures[textureIndex]) {
-    object.material.map = projectTextures[textureIndex]
-    object.customDepthMaterial.map = projectTextures[textureIndex]
+
+    object.material.map = projectTextures[textureIndex][key]
+    object.customDepthMaterial.map = projectTextures[textureIndex][key]
     // console.log('update', renderer)
   }
+}
+
+function createTexture (tex) {
+  var clothTexture = loader.load( tex )
+  clothTexture.anisotropy = 16
+  clothTexture.wrapS = THREE.RepeatWrapping
+  clothTexture.wrapT = THREE.RepeatWrapping
+  clothTexture.repeat.x = - 1
+  // projectTextures.push(clothTexture)
+  return clothTexture
 }
 
 function init(containerId, textures, select, imagesLoaded) {
@@ -78,34 +93,39 @@ function init(containerId, textures, select, imagesLoaded) {
   // camera
 
   camera = new THREE.PerspectiveCamera( 30, (window.innerWidth-32) / window.innerHeight, 1, 1000 )
-  if (window.innerWidth < 800) cameraHeight = 500
   camera.position.set( 0, cameraHeight, 50 )
   
   // lights
 
   scene.add( new THREE.AmbientLight( 0xffffff ) )
 
+  // renderer
+
+  renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } )
+  renderer.setPixelRatio( window.devicePixelRatio )
+  renderer.setSize( window.innerWidth, window.innerHeight )
+  renderer.setClearColor( 0x000000, 0 )
+
+  container.appendChild( renderer.domElement )
+
+  renderer.outputEncoding = THREE.sRGBEncoding
+  renderer.shadowMap.enabled = false
+  onWindowResize()
+
   // cloth material
-  var loader = new THREE.TextureLoader()
+  loader = new THREE.TextureLoader()
   loader.manager.onLoad = function ()  {
     imagesLoaded()
   }
   for (var t = 0; t < textures.length; t++) {
     const tex = textures[t]
-    
-    var clothTexture = loader.load( tex )
-    clothTexture.anisotropy = 16
-    clothTexture.wrapS = THREE.RepeatWrapping
-    clothTexture.wrapT = THREE.RepeatWrapping
-    clothTexture.repeat.x = - 1
-    projectTextures.push(clothTexture)
+    const defaulty = createTexture(tex.default)
+    const mobile = createTexture(tex.mobile)
+    projectTextures.push({default: defaulty, mobile: mobile})
   }
 
- 
-  
-
   var clothMaterial = new THREE.MeshLambertMaterial({
-    map: projectTextures[0],
+    map: projectTextures[0][key],
     side: THREE.DoubleSide,
     transparent: true, 
     alphaTest: 0.5
@@ -128,26 +148,15 @@ function init(containerId, textures, select, imagesLoaded) {
     alphaTest: 0.5
   })
 
-  // renderer
 
-  renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } )
-  renderer.setPixelRatio( window.devicePixelRatio )
-  renderer.setSize( window.innerWidth, window.innerHeight )
-  renderer.setClearColor( 0x000000, 0 )
-
-  container.appendChild( renderer.domElement )
-
-  renderer.outputEncoding = THREE.sRGBEncoding
-  // renderer.shadowMapEnabled = false
-  renderer.shadowMap.enabled = false
-
-  // copyCanvas = new Copy(container, renderer)
-  // renderer.autoClear = false
   window.addEventListener( 'mousemove', onMove, false )
   window.addEventListener( 'touchmove', onMove, false )
-  window.addEventListener( 'click', onClick, false )
+  renderer.domElement.addEventListener( 'click', onClick, false )
   window.addEventListener( 'resize', onWindowResize, false )
-
+  render()
+  fixedCameraRotation =  THREE.Math.degToRad(180)
+  camera.lookAt(cloth.center)
+  camera.rotateZ(fixedCameraRotation)
 }
 function onClick () {
   var intersects = raycaster.intersectObjects( scene.children )
@@ -178,9 +187,15 @@ function onMove (event) {
   
 }
 function onWindowResize() {
+  camera.position.set( 0, cameraHeight, 50 )
 
   camera.aspect = (window.innerWidth) / (window.innerHeight)
   camera.updateProjectionMatrix()
+
+  key = 'default'
+  if (window.innerWidth < window.innerHeight) {
+    key = 'mobile'
+  }
 
   renderer.setSize( window.innerWidth,  (window.innerHeight) )
 }
@@ -272,6 +287,7 @@ function animate( ) {
   const time = 0.0001 * Date.now()
   simulate( time )
   render()
+  camera.updateProjectionMatrix()
 }
 
 function render() {
@@ -284,27 +300,17 @@ function render() {
     clothGeometry.attributes.position.setXYZ( i, v.x, v.y, v.z )
   }
   
-      
   cloth.center.x = cloth.center.x/(p.length - 1)
   cloth.center.y = cloth.center.y/(p.length - 1)
   cloth.center.z = cloth.center.z/(p.length - 1)
-
-  // console.log(cloth.center)
 
   clothGeometry.attributes.position.needsUpdate = true
   clothGeometry.computeVertexNormals()
   
   camera.position.y = cloth.center.y + cameraHeight
   camera.position.x = cloth.center.x
-  // camera.position.z = cloth.center.z * -1
-  // console.log(cloth.center.z)
-  camera.lookAt(cloth.center)
+  camera.position.z = cloth.center.z
 
-  // var intersects = raycaster.intersectObjects( scene.children )
-  
-
-	
-  
   renderer.render( scene, camera )
 }
 
@@ -315,7 +321,7 @@ function setLoaded(load) {
 function removeListeners () {
   window.removeEventListener('mousemove', onMove)
   window.removeEventListener('touchmove', onMove)
-  window.removeEventListener('click', onClick)
+  renderer.domElement.removeEventListener('click', onClick)
   window.removeEventListener('resize', onWindowResize )
 }
 
