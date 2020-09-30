@@ -4,12 +4,13 @@
 "hero": "3.jpg",
 "agency": "Grumpy Sailor",
 "client": "Melbourne Museum, Transport Accident Commision",
-"description": "A data visulisation that entices users to learn about deaths and accidents on Victoria's roads. Two interactives were delivered, one in which displayed a representation of ten thousand users on Victoria's roads. As users moved, stories of individuals would be highlighted through text and visual representation of statistics. The other installation showed a cityscape of Victoria, with various road users occupying the city. As users moved in front of individual screens, information about that area of Victoria would be extrapolated. Users interacted with the installation by moving in front of these screen arrays. Users could choose to passively or actively engage in the installation.",
+"description": "The Road To Zero Foyer Installation won a Merit in the Digital Category in the 2019 AGDA Awards. A data visualisation that entices users to learn about deaths and accidents on Victoria's roads. Two interactives were delivered, one in which displayed a representation of ten thousand users on Victoria's roads. As users moved, stories of individuals would be highlighted through text and visual representation of statistics. The other installation showed a cityscape of Victoria, with various road users occupying the city. As users moved in front of individual screens, information about that area of Victoria would be extrapolated. Users interacted with the installation by moving in front of these screen arrays. Users could choose to passively or actively engage in the installation.",
 "permalink": "/road-to-zero",
 "date": "2018",
 "tech": ["Lidar Sensor", "Unity"],
 "images": [1,2,3,4],
 "role": "Creative Developer",
 "delivery": ["Windows Application", "Lidar Sensor"],
+"video": "ag2_L8kMEUA",
 "links": ["https://www.google.com"]
 }
