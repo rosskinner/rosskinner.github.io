@@ -277,7 +277,7 @@ p {
   }
 
   .loader-container {
-    height: calc(100vh - 8rem);
+    height: calc(100vh - 6rem);
   }
 
   .project-title h1 {
