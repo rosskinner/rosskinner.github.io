@@ -2,11 +2,15 @@
   "title": "MOD Cascade",
   "info": "Art Installation",
   "hero": "hero.png",
-  "description": "Some Cool Shit",
+  "agency": "Grumpy Sailor",
+  "client": "MOD",
+  "description": "Winning a Distinction in the Digital Category in the 2019 AGDA Awards, we were tasked to come up with a concept and build of an installation that enticed users to exercise through reward. A double sided FlipDot Tower prompted users to move around in MOD's Hedonism Exhibition. A Lidar Sensor would measure how much ground users covered, a visualisation was shown on the flipdot tower to reflect this. As users completed different levels they were rewarded with an animation that was pleasing to watch and hear through the clacking of the analogue flipdots.",
   "permalink": "/mod",
   "date": "2019",
-  "stack": ["javascript", "Electron", "Three JS"],
+  "tech": ["Unity", "Lidar Sensor"],
   "images": [1,2,3,4],
-  "delivery": ["Windows Application", "Network"],
+  "video": "i06KPIYImq0",
+  "role": "Creative Developer", 
+  "delivery": ["FlipDot Tower", "Design Concept", "UX", "Hardware", "Installation"],
   "links": ["https://www.google.com"]
 }

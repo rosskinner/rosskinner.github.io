@@ -1,13 +1,16 @@
 {
   "title": "Australian Sports Museum",
   "hero": "2.jpg",
-  "info": "Exhibition",
-  "description": "Some More Cool Shit - I made all of the things in this exhibition. it was great. you should go see it. Some More Cool Shit - I made all of the things in this exhibition. it was great. you should go see it. Some More Cool Shit - I made all of the things in this exhibition. it was great. you should go see it.",
-  "permalink": "/australian-sports-museum",
-  "images": [1,2,3,4,5],
   "date": "2020",
-  "stack": ["javascript", "Electron", "Three JS"],
-  "delivery": ["Windows Application", "Network"],
-  "links": ["https://www.google.com"]
+  "info": "Game On Exhibition / Installation",
+  "agency": "Grumpy Sailor",
+  "client": "Australian Sports Museum",
+  "description": "An interactive exhibition in the MCG, Melbourne. Visitors are invited to play with 17 interactive experiences, with a focus of Australian sport and culture. Integrating physical sensors with digital interactives to formulate engaging and playful installations.",
+  "permalink": "/australian-sports-museum",
+  "images": [0,["output.gif", "output2.gif", "output3.gif",  "output4.gif"],1,2,3,4],
+  "role": "Creative Developer",
+  "tech": ["Docker","ElectronExpress", "Lidar", "NFC", "NodeJs", "PixiJS", "PostCSS","Proximity Sensor", "React", "Rotary Encoder", "Texture Packer", "ThreeJs", "Webpack", "WebSockets"],
+  "delivery": ["Electron Application", "CMS", "App Updater Manager"],
+  "links": ["https://www.instagram.com/p/B_Ri-HWjxnu/"]
 }
 

@@ -2,11 +2,14 @@
 "title": "Starlight Magic",
 "info": "Physical Prototype",
 "hero": "1.jpg",
-"description": "Some More Cool Shit",
+"agency": "Grumpy Sailor",
+"client": "Starlight Foundation",
+"description": "The Starlight Foundation approached us to come up with a working prototype that would engage sick kids in hospital. Often these kids are in and out of hospital and we wanted a way in which we could make this experience a little better. We came up with the Magic Stethoscope, a device that is common in hospitals but has been transformed for kids to own instead of the medical staff they may be surrounded by. The Magic Stethoscope allowed kids to hear characters around the Starlight Express Room. As you places the stehoscope on and moved the breast plate over the characters, they would come to life. Using a colour sensor, colours were translated into audio. There were two modes, sotry mode and music mode. As kids chose music mode, they could glide the breast plate over any object to play a note. The whole room became a musical instrument.",
 "permalink": "/starlight",
 "date": "2018",
-"stack": ["Bela IO", "C#"],
-"images": [0,1,2,3],
+"tech": ["Bela IO", "C#", "Colour Sensor"],
+"images": [1,2,3],
+"role": "Creative Developer",
 "delivery": ["Physical Prototype"],
 "links": ["https://www.google.com"]
 }
