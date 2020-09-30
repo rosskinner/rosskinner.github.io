@@ -24,13 +24,15 @@ export default function ProjectPage (props) {
       s.push(<span key={key}>{item}{spacer} </span>)
     })
     setStack(s)
-
-    data.links.forEach((item, key) => {
-      let spacer = ','
-      if (key === data.links.length - 1) spacer = ''
-      l.push(<a className='link black' href={item} key={key}>{item}{spacer} </a>)
-    })
-    setLink(l)
+    if (data.links) {
+      data.links.forEach((item, key) => {
+        let spacer = ','
+        if (key === data.links.length - 1) spacer = ''
+        l.push(<a className='link black' href={item} key={key}>{item}{spacer} </a>)
+      })
+      setLink(l)
+    }
+    
 
     data.delivery.forEach((item, key) => {
       let spacer = ','
@@ -60,8 +62,6 @@ export default function ProjectPage (props) {
   },[])
   
   const projectLoaded = project !== null
-  // console.log('projectLoaded', projectLoaded)
-
   return (
     <div className='page'>
       <Loader loaded={loaded} />
@@ -107,9 +107,12 @@ export default function ProjectPage (props) {
               <p>
                 <strong>Tech:</strong> {stack}
               </p>
-              <p>
+              {link.length > 0 &&
+                <p>
                 <strong>Links:</strong> {link}
               </p>
+              }
+              
 
               <p className='f4 f4-l mt5'>
                 {project.description}

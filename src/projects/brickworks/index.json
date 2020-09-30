@@ -10,8 +10,7 @@
   "images": [1,2],
   "date": "2019",
   "role": "Creative Developer",
-  "tech": ["Javascript", "Electron", "React", "PixiJS", "FlipDots"],
-  "delivery": ["Physical Flipdot Signage", "CMS"],
-  "links": [""]
+  "tech": ["JavaScript", "Electron", "React", "PixiJS", "FlipDots"],
+  "delivery": ["Physical Flipdot Signage", "CMS"]
 }
 
