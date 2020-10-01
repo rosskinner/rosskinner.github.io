@@ -41,12 +41,9 @@ export default function HomePage (props) {
   const onClick  = useCallback(e => {
     setRedirect(true)
   })
-  const onEnter = () => {
-    setDistance(0)
-  }
   const onMove = (e) => {
     distance++
-    
+    console.log(distance, totalDistance)
     if (distance > totalDistance) {
       distance = 0
       const index = activeProject === projects.length - 1 ? 0 : activeProject + 1
@@ -64,21 +61,20 @@ export default function HomePage (props) {
 
   useEffect(() => {
     if (loaded) Hero.updateTexture(activeProject)
+    if (window.innerWidth < 800) totalDistance = 20
     window.addEventListener('mousemove', onMove)
     window.addEventListener('touchmove', onMove)
-    window.addEventListener('mouseenter', onEnter)
     
     return () => {
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('touchmove', onMove)
-      window.removeEventListener('mouseenter', onEnter)
     }
     
   },[activeProject])
 
   useEffect(() => {
     fetchProjects()
-    if (window.innerWidth < 800) totalDistance = 100
+    if (window.innerWidth < 800) totalDistance = 20
     const body = document.getElementsByTagName('body')[0]
     body.classList.add('hidden')
 

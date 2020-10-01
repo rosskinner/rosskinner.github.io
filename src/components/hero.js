@@ -163,7 +163,7 @@ function onClick () {
   if (intersects.length > 0) selectProject(true)
 }
 function onMove (event) {
-  // console.log(event.clientX)
+  
   let mouse = event
   if (mouse.clientX === undefined) mouse = event.touches[0]
   const x = ( mouse.clientX / window.innerWidth ) * 2 - 1
@@ -195,6 +195,7 @@ function onWindowResize() {
   key = 'default'
   if (window.innerWidth < window.innerHeight) {
     key = 'mobile'
+    ballSize = 25
   }
 
   renderer.setSize( window.innerWidth,  (window.innerHeight) )
@@ -209,7 +210,7 @@ function simulate( now ) {
   particles = cloth.particles
   var windStrength = Math.cos( now / 7000 )
   
-  windForce.set( Math.sin( now / Math.random() * 2000 ), Math.cos( now / Math.random() * 3000 ), Math.sin( now / Math.random() * 100 ) )
+  windForce.set( Math.sin( now / Math.random() * 2000 ), Math.cos( now / Math.random() * 3000 ), Math.sin( now / Math.random() * 1000 ) )
   windForce.normalize()
   windForce.multiplyScalar( windStrength )
 
@@ -315,7 +316,7 @@ function setLoaded(load) {
 
 function removeListeners () {
   window.removeEventListener('mousemove', onMove)
-  window.removeEventListener('touchmove', onMove)
+  // window.removeEventListener('touchmove', onMove)
   renderer.domElement.removeEventListener('click', onClick)
   window.removeEventListener('resize', onWindowResize )
 }

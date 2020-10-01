@@ -75,8 +75,8 @@ export default function ProjectPage (props) {
             <img className='w-100 mv2' onLoad={onLoad} src={require(`../projects${project.permalink}/${project.hero}`).default} />
           </div>
         </div>
-        <div>
-          <h1 className='pr5 f4 f2-l georgia'>{project.title}</h1>
+        <div className='ml4 ml0-l'>
+          <h1 className='pr5 f3 f2-l georgia'>{project.title}</h1>
         </div>
         <div className='w-100 flex flex-column justify-center items-center'>
           <div className='project-content flex flex-column flex-row-l w-100-l mh4 mh0-l mt5 mb3 f4 f4-l'>
@@ -122,17 +122,14 @@ export default function ProjectPage (props) {
           </div>
           {project.video &&
             <div className='flex flex-column w-100 video-container mt0 mt4-l mb0 mb3-l'>
-
             <iframe
             className='video'
-            width="100%"
-            height="100%"
-            src={`https://www.youtube.com/embed/${project.video}?rel=0&amp;showinfo=0;modestbranding=1`}
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
+            src={`https://www.youtube.com/embed/${project.video}`}
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
             allowFullScreen
+            onLoad={onLoad}
           ></iframe>
-            <video  onLoad={onLoad} src={project.video} />
           </div>
           }
           

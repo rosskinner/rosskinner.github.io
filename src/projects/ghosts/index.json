@@ -5,13 +5,12 @@
   "hero": "1.jpg",
   "agency": "Grumpy Sailor",
   "client": "Google",
-  "description": "A Digital Theatre experience at the Adelaide Fringe Festival - audience members were invited to partake in a performance with a twist. Audience members were given the opportunity to listen into performers thoughts by 'tuning' into them by way of facing the performers direction. Audience members were given an Android device and headphones that were built into a ghost costume. This would track audience members movement and deliver directional audio. Utilising the Gyro in Android devices, prerecorded audio would play while the live performance would continue around the audience members. This experience was later adapted into a VR Unity application that was displayed in Melbourne's ACMI. This utilised 360 video and spatialised/ directional audio.",
+  "description": "A Digital Theatre experience at the Adelaide Fringe Festival - audience members were invited to partake in a performance with a twist. Audience members were given the opportunity to listen into performers thoughts by 'tuning' into them by way of facing the performers direction. Audience members were given an Android device and headphones that were built into a ghost costume. This would track audience members movement and deliver directional audio. Utilising the Gyro in Android devices, pre-recorded audio would play while the live performance would continue around the audience members. This experience was later adapted into a VR Unity application that was displayed in Melbourne's ACMI. This utilised 360 video and spatialised/ directional audio.",
   "permalink": "/ghosts",
   "date": "2016",
   "tech": ["WebGL", "Unity"],
   "role": "Creative Developer",
   "images": [1,2,3],
   "video": "-WAd3SLkrMs",
-  "delivery": ["Android Application", "CMS for Directional Audio", "VR Application"],
-  "links": ["https://www.google.com"]
+  "delivery": ["Android Application", "CMS for Directional Audio", "VR Application"]
 }

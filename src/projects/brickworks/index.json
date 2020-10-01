@@ -5,7 +5,7 @@
   "agency": "Grumpy Sailor",
   "client": "Burwood Brickworks",
   "hero": "1.jpg",
-  "description": "Burwood Brickworks is Australia's first sustainable shopping center. The brief was to create a low energy signage solution that could be easily updated by the client. We used a Flipdot display that has analogue properties and created a supporting CMS that allows the signage content to be updated every 15 minutes. Messages highlight events, facts about Burwood Brickworks and information about opening hours. These messages are sent to the FlipDot display through UDP Protocol.",
+  "description": "Burwood Brickworks is Australia's first sustainable shopping centre. The brief was to create a low energy signage solution that could be easily updated by the client. We used a Flipdot display that has analogue properties and created a supporting CMS that allows the signage content to be updated every 15 minutes. Messages highlight events, facts about Burwood Brickworks and information about opening hours. These messages are sent to the FlipDot display through UDP Protocol.",
   "permalink": "/brickworks",
   "images": [1,2],
   "date": "2019",
